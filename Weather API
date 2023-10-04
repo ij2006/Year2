@@ -1,0 +1,27 @@
+#KEY = 7a3d3737601ed6fa9f35bfcfb0732d45
+#
+#
+# https://openweathermap.org/price
+# https://stackoverflow.com/questions/64192319/openweathemap-api-saying-temperature-is-like-282
+#
+#
+import requests
+#
+#
+location = input('Location pls ')
+url = f'http://api.openweathermap.org/data/2.5/weather?q={location}&appid=7a3d3737601ed6fa9f35bfcfb0732d45'
+r = requests.get(url)
+data = r.json()
+print(data)
+#
+
+temp =data['main']['temp']
+# use the key
+temp = temp -273.15
+print(temp)
+
+desc = data['weather'][0]['description']
+print(desc)
+
+loc = data['name']
+print(loc)
