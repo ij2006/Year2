@@ -1,0 +1,11 @@
+# Terms and conditions window
+terms_and_conditions = open('terms_and_conditions.txt', 'r') # Opens the necesarry file
+tc_window = Window(app, title = 'Terms and conditions', height = 550, width = 1000) # Creates terms and conditions window
+tc_box = Box(tc_window, align = 'top', width = 'fill', height = 'fill', layout = 'grid') # Creates a box inside the terms and conditions window using grid function
+tc_lable = Text(tc_box, text = 'Terms and Conditions', grid = [0,0], size = 20) 
+tc_blank_row1 = Text(tc_box, text = '', grid = [0,1], height = 1)
+tc_text = Text(tc_box, text = terms_and_conditions.read(), grid = [0,2])
+tc_blank_row2 = Text(tc_box, text = '', grid = [0,3], height = 1)
+tc_back_button = PushButton(tc_box, text = 'I have read the T&Cs', grid = [0,4], command = back_to_main_menu) # Adds back button into terms and coditions box that runs the back to main menu procedure
+
+tc_window.hide()
