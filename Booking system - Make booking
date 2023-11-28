@@ -2,6 +2,13 @@ from tkcalendar import DateEntry, Calendar
 import tkinter as tk
 import datetime
 
+def add_roomID():
+    # Find a room suited to users choices and returns it to create new booking procedure
+    sqlselect = "SELECT * FROM Room_Table WHERE room_location = '"+str(make_booking_location_combo.value) + "' AND room_type = '"+str(make_booking_room_type_combo.value)+"'"  # Find all bookings in database before today
+    rows = query_database(database_file, sqlselect) # Runs sql query procedure
+    roomID = rows[0][0] # Gets correct value from database
+    return roomID # Returns the value
+
 def change_location_pic():
     # Changes the image on the make booking window to the selected location
     if make_booking_location_combo.value  == 'London':
@@ -33,6 +40,28 @@ def show_booking_details():
     make_booking_value_room_cost_night.value = cost_night # Outputs booking details 
     make_booking_value_room_cost_total.value = cost_night*room_amount # Outputs booking details
 
+def printDate(cal):
+    # Gets the date in the correct format from the tkcalendar
+    dt=cal.selection_get()
+    date=cal.get_date()
+    date=dt.strftime("%d/%m/%Y")
+    print(date)
+    return date
+
+def create_new_booking():
+    # Adds new booking into databse
+    start_date = printDate(calendar1) # Gets the start date in the right format from the tkcalendar
+    end_date = printDate(calendar2) # Gets the end date in the right format from the tkcalendar
+    if make_booking_num_guests_combo.value == 1:
+        room_amount = 1 # prevents integer division anomaly
+    else:
+        room_amount = int(make_booking_num_guests_combo.value) // 2 # Uses integer division to decide number on rooms for guest
+    roomID = add_roomID() # Gets room ID
+    global glb_user_logged_in 
+    mysql5 = ("INSERT INTO Booking_Table (booking_num_people, booking_num_rooms, booking_location, booking_start_date, booking_end_date, userID, roomID) VALUES ('"+ str(make_booking_num_guests_combo.value) + "','" + str(num_rooms) + "','" + str(make_booking_location_combo.value) + "','" + str(start_date) + "','" + str(end_date) + "','" + str(glb_user_logged_in) +"','" + str(roomID) + "')") # SQL to insert the new booking into the correct database
+    execute_sql(database_file, mysql5) # Executes sql
+    info('Success','Booking created') # For UX
+
 # Make booking window
 make_booking_window = Window(app, title = 'Make a booking', height = 400, width = 1600) # Create window for making bookings
 make_booking_box = Box(make_booking_window, align = 'top', width = 'fill', height = 'fill', layout = 'grid') # Create box inside window using a grid
@@ -50,6 +79,33 @@ make_booking_location_combo = Combo(make_booking_box, options = ['London', 'Port
 make_booking_location_lable = Text(make_booking_box, text = 'Select location', grid = [10,0], align = 'left')
 make_booking_location_picture = Picture(make_booking_box, image = 'hotel_logo.png', grid = [10,1], height = 200, width = 210, align = 'right') # Add command to change pic depending on location 
 make_booking_blank_row1 = Text(make_booking_box, text = ' ', grid = [0,1], height = 15) # Creates space between two rows to improve appearance
+
+# Create box within make booking box to display users booking details choices in a more aesthetically pleasing structure
+make_booking_second_box = Box(make_booking_box, grid = [2,1], width = 'fill', height = 'fill', layout = 'grid')
+make_booking_value_num_people_lable = Text(make_booking_second_box, text = 'Number of people:', grid = [0,0], width = 15, size = 9) 
+make_booking_value_num_rooms_lable = Text(make_booking_second_box, text = 'Number of rooms:', grid = [0,1], width = 15, size = 9) 
+make_booking_value_location_lable = Text(make_booking_second_box, text = 'Location:', grid = [0,2], width = 15, size = 9) 
+make_booking_value_start_date_lable = Text(make_booking_second_box, text = 'Arrival date:', grid = [0,3], width = 15, size = 9) 
+make_booking_value_end_date_lable = Text(make_booking_second_box, text = 'Checkout date:', grid = [0,4], width = 15, size = 9) 
+make_booking_value_room_type_lable = Text(make_booking_second_box, text = 'Room type:', grid = [0,5], width = 15, size = 9) 
+make_booking_value_room_cost_night_lable = Text(make_booking_second_box, text = 'Cost per night cost:', grid = [0,6], width = 15, size = 9)
+make_booking_value_room_cost_total_lable = Text(make_booking_second_box, text = 'Total cost:', grid = [0,7], width = 15, size = 9)
+
+# Create box within make booking box to display users booking details choices in a more aesthetically pleasing structure
+make_booking_third_box = Box(make_booking_box, grid = [3,1], width = 'fill', height = 'fill', layout = 'grid')
+make_booking_value_room_cost_total = TextBox(make_booking_third_box, grid = [0,7], width = 20)
+make_booking_value_room_cost_night = TextBox(make_booking_third_box, grid = [0,6], width = 20)
+make_booking_value_room_type = TextBox(make_booking_third_box, grid = [0,5], width = 20)
+make_booking_value_end_date = TextBox(make_booking_third_box, grid = [0,4], width = 20)
+make_booking_value_start_date = TextBox(make_booking_third_box, grid = [0,3], width = 20)
+make_booking_value_location = TextBox(make_booking_third_box, grid = [0,2], width = 20)
+make_booking_value_num_rooms = TextBox(make_booking_third_box, grid = [0,1], width = 20)
+make_booking_value_num_people = TextBox(make_booking_third_box, grid = [0,0], width = 20)
+make_booking_confirm_button = PushButton(make_booking_box, text = 'Confirm booking', grid = [4,8], command = create_new_booking) # Adds button into the make booking box that runs the create new booking  procedure
+make_booking_back_button = PushButton(make_booking_box, text = 'Back', grid = [11,8], command = back_to_landing_page) # Adds button into the make booking box that runs the back to landing page procedure
+
+make_booking_window.hide()
+
 
 # Booking start date calandar 
 calendar_start_date_window = Window(app, title="Arrival date",width=250, height=170)
