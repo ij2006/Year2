@@ -1,0 +1,19 @@
+# Main menu Window
+main_menu_window = Window(app, title = 'Main menu',  height = 400, width = 600)
+main_menu_box = Box(main_menu_window, align = 'top', width = 'fill', height = 'fill', layout = 'grid') # Creates box inside app
+main_menu_blank_column1 = Text(main_menu_box, text = ' ', grid = [0,0]) # Creates space between two rows to improve appearance
+main_menu_lable = Text(main_menu_box, text = 'Welcome to IJ’s hotel booking services!', grid = [2,0]) # Adds welcome message to main menu
+main_menu_logo = Picture(main_menu_box, image = 'hotel_logo.png', grid = [3,0], height = 50, width = 70, align = 'right') # Adds logo to main menu window
+main_menu_blank_row1 = Text(main_menu_box, text = ' ', grid = [0,1]) # Creates space between two rows to improve appearance
+main_menu_login_button = PushButton(main_menu_box, text = 'Login', height = 4, width = 15, grid = [1,2], command = login_window_process) # Login button which when pressed runs login_window_process def.
+main_menu_sign_up_button = PushButton(main_menu_box, text = 'Sign up', height = 4, width = 15, grid = [2,2], command = sign_up_button_process) # Adds sign up button to main menu
+main_menu_settings_button = PushButton(main_menu_box, text = 'Settings', height = 4, width = 15, grid = [3,2], command = settings_button_process) # Adds settings button to main menu
+main_menu_exit_button = PushButton(main_menu_box, text = 'Exit', height = 1, width = 8, grid = [3,8], command = exit_app) # Exit button destroys app when pressed
+main_menu_blank_row2 = Text(main_menu_box, text = ' ', grid = [0,3]) # Creates space between two rows to improve appearance
+main_menu_blank_row3 = Text(main_menu_box, text = ' ', grid = [0,4]) # Creates space between two rows to improve appearance
+main_menu_cookies_lable = Text(main_menu_box, text = 'Consent to cookies', grid = [1,5], size = 8) # Adds cookies lable to main menu
+main_menu_cookies_tick = CheckBox(main_menu_box, grid = [2,5], align = 'left') # Adds check boc to allow user to consent to cookies on main menu
+main_menu_view_cookies_policy_button = PushButton(main_menu_box, text = 'View Cookies Policy', width = 15, grid = [1,6], command = cookie_policy) # Button to show terms and conditions in separate window displayed using function
+main_menu_TC_lable = Text(main_menu_box, text = 'Agree to Terms and Conditions', grid = [1,7], size = 8) # Adds cookies lable to main menu
+main_menu_TC_tick = CheckBox(main_menu_box, grid = [2,7], align = 'left') # Adds check boc to allow user to consent to cookies on main menu
+main_menu_view_TC_button = PushButton(main_menu_box, text = 'View T&Cs', width = 15, grid = [1,8], command = terms_and_conditions) # Button to show terms and conditions in separate window displayed using function
