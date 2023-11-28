@@ -1,0 +1,14 @@
+# Landing page window
+landing_page_window =  Window(app, title = 'Landing page', height = 400, width = 970) # Creeate landing page window
+landing_page_box = Box(landing_page_window, align = 'top', width = 'fill', height = 'fill', layout = 'grid') # Create box in aign up window
+landing_page_lable = Text(landing_page_box, text = 'Home', grid = [1,0], size = 20) # Adds lable to sign up window
+landing_page_blank_row1 = Text(landing_page_box, text = ' ', grid = [2,2], height = 10) # Creates space between two columns to improve appearance
+landing_page_logo = Picture(landing_page_box, image = 'hotel_logo.png', grid = [3,0], height = 50, width = 70, align = 'right') # Add logo to sign up window
+landing_page_info_lable = Text(landing_page_box, text = 'To book a hotel select ‘Make booking’,\n to view past bookings select ‘View past bookings’,\n to change your current bookings select ‘ Manage booking ’ \n or to go back to login page select ‘Back’.', grid = [1,1]) # Adds lable to sign up window
+landing_page_blank_column1 = Text(landing_page_box, text = ' ', grid = [0,1], width = 25) # Creates space between two columns to improve appearance
+landing_page_make_booking_button = PushButton(landing_page_box, text = 'Make Booking',grid = [0,2], width = 20, height = 5, command = make_booking_routine) # Create account button to promt create account routine function
+landing_page_view_past_bookings_button = PushButton(landing_page_box, text = 'View past bookings',grid = [1,2], width = 20, height = 5, command = view_past_bookings_process) # Create account button to promt create account routine function
+landing_page_manage_booking_button = PushButton(landing_page_box, text = 'Manage booking',grid = [2,2], width = 20, height = 5, command = manage_bookings) # Create account button to promt create account routine function
+landing_page_back_button = PushButton(landing_page_box, text = 'Back', grid = [3,4], width = 15, height = 2, command = back_to_main_menu) # Adds back button into landing page box that runs the back to main menu procedure
+
+landing_page_window.hide()
