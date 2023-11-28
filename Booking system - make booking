@@ -1,0 +1,72 @@
+from tkcalendar import DateEntry, Calendar
+import tkinter as tk
+import datetime
+
+def change_location_pic():
+    # Changes the image on the make booking window to the selected location
+    if make_booking_location_combo.value  == 'London':
+        make_booking_location_picture.image = 'London.jpg'
+    elif make_booking_location_combo.value  == 'Portsmouth':
+        make_booking_location_picture.image = 'Portsmouth.jpg'
+    elif make_booking_location_combo.value  == 'Havant':
+        make_booking_location_picture.image = 'Havant.jpg'
+    show_booking_details()
+
+def show_booking_details():
+    # Displays the users chosen booking details by filling in the texboxes
+    sqlselect = "SELECT * FROM Room_Table WHERE room_location = '"+str(make_booking_location_combo.value) + "' AND room_type = '"+str(make_booking_room_type_combo.value)+"'" # SQL to run
+    rows = query_database(database_file, sqlselect) # Runs sql query procedure
+    cost = rows[0][2] # Selects the correct value from the database
+    cost_night = float(cost) # Makes cost into float to do calculations on the cost
+    if make_booking_num_guests_combo.value == 1:
+        room_amount = 1 # prevents integer division anomaly
+    else:
+        room_amount = int(make_booking_num_guests_combo.value) // 2 # Uses integer division to decide number on rooms for guest
+    start_date = printDate(calendar1) # Gets start date
+    end_date = printDate(calendar2) # Gets end date 
+    make_booking_value_num_people.value = make_booking_num_guests_combo.value # Outputs booking details
+    make_booking_value_num_rooms.value = room_amount # Outputs booking details
+    make_booking_value_location.value = make_booking_location_combo.value# Outputs booking details
+    make_booking_value_start_date.value = start_date # Outputs booking details
+    make_booking_value_end_date.value = end_date # Outputs booking details
+    make_booking_value_room_type.value = make_booking_room_type_combo.value # Outputs booking details
+    make_booking_value_room_cost_night.value = cost_night # Outputs booking details 
+    make_booking_value_room_cost_total.value = cost_night*room_amount # Outputs booking details
+
+# Make booking window
+make_booking_window = Window(app, title = 'Make a booking', height = 400, width = 1600) # Create window for making bookings
+make_booking_box = Box(make_booking_window, align = 'top', width = 'fill', height = 'fill', layout = 'grid') # Create box inside window using a grid
+make_booking_logo = Picture(make_booking_box, image = 'hotel_logo.png', grid = [11,0], height = 50, width = 70, align = 'right') # Add logo to make booking window
+make_booking_blank_column1 = Text(make_booking_box, text = ' ', grid = [0,0], width = 5) # Creates space between two columns to improve appearance
+make_booking_calendar_button1 = PushButton(make_booking_box, text = 'Choose arrival date', grid = [1,0], align = 'right', command = calendar_start_date_open) # Adds button into the make booking box that runs the start date calendar procedure
+make_booking_start_date_lable = Text(make_booking_box, text = 'Select arrival date', grid = [2,0], align = 'left')
+make_booking_calendar_button2 = PushButton(make_booking_box, text = 'Choose check out date', grid = [3,0], align = 'right', command = calendar_end_date_open) # Adds button into the make booking box that runs the end date calendar procedure
+make_booking_end_date_lable = Text(make_booking_box, text = 'Select check out date', grid = [4,0], align = 'left')
+make_booking_num_guests_combo = Combo(make_booking_box, options = [1,2,3,4], grid = [5,0],  align = 'right', command = show_booking_details) # Adds button into the make booking box that runs show booking details procedure
+make_booking_num_guests_lable = Text(make_booking_box, text = 'Select number of guests', grid = [6,0], align = 'left')
+make_booking_room_type_combo = Combo(make_booking_box, options = ['Double', 'Single'], grid = [7,0], align = 'right', command = show_booking_details) # Adds button into the make booking box that runs show booking details procedure
+make_booking_room_type_lable = Text(make_booking_box, text = 'Select room type', grid = [8,0], align = 'left')
+make_booking_location_combo = Combo(make_booking_box, options = ['London', 'Portsmouth', 'Havant'], grid = [9,0], align = 'right', command = change_location_pic) # Adds button into the make booking box that runs the change location picture procedure
+make_booking_location_lable = Text(make_booking_box, text = 'Select location', grid = [10,0], align = 'left')
+make_booking_location_picture = Picture(make_booking_box, image = 'hotel_logo.png', grid = [10,1], height = 200, width = 210, align = 'right') # Add command to change pic depending on location 
+make_booking_blank_row1 = Text(make_booking_box, text = ' ', grid = [0,1], height = 15) # Creates space between two rows to improve appearance
+
+# Booking start date calandar 
+calendar_start_date_window = Window(app, title="Arrival date",width=250, height=170)
+calendar1 = Calendar(calendar_start_date_window.tk, selectmode='day', mindate=datetime.datetime.now(),showweeknumbers=False,showothermonthdays=False)
+calendar_start_date_window.add_tk_widget(calendar1)
+calendar1.bind("<<CalendarSelected>>", lambda eventType: printDate(calendar1)) # print selected date
+calendar1.selection_set(calendar1.selection_get())
+start_date = printDate(calendar1) # Gets start date in correct format for above calendar
+
+calendar_start_date_window.hide()
+
+# Booking end date calandar
+calendar_end_date_window = Window(app, title="Check out date",width=250, height=170)
+calendar2 = Calendar(calendar_end_date_window.tk, selectmode='day', mindate=datetime.datetime.now(),showweeknumbers=False,showothermonthdays=False)
+calendar_end_date_window.add_tk_widget(calendar2)
+calendar2.bind("<<CalendarSelected>>", lambda eventType: printDate(calendar2)) # print selected date
+calendar2.selection_set(calendar2.selection_get())
+end_date = printDate(calendar2) # Gets start date in correct format for above calendar
+
+calendar_end_date_window.hide()
