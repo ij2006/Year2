@@ -1,0 +1,54 @@
+def login_window_process():
+    if main_menu_cookies_tick.value == False: # If user has not given cookie consent hey cannot go to login
+        info('Cookies', 'Please consent to cookies')
+    elif main_menu_TC_tick.value == False: # If user has not agreed to terms and conditions they cannot go to  login
+        info('Ts & Cs','Please agree to Terms and Conditions')
+    else:
+        # Displays login window to user
+        main_menu_window.hide()
+        login_window.show()
+
+
+def login_routine():
+    # Validate username + password
+    if login_username_input.value == "": # If the user has not entered any text
+        info("Error", "You must enter a username") # Error message to inform user to enter username
+    elif login_password_input.value == "": # If the user has not entered any text
+        info("Error", "You must enter a password") # Error message to inform user to enter password
+    elif "'" in login_password_input.value  or "'" in login_username_input.value: # Mitigate against sql injection
+        info("Error", "Invalid entry") # Error message
+    else:
+        # Check input to database
+        sqlselect = ["SELECT * FROM User_Table WHERE username=?", (login_username_input.value,)]
+        rows = query_database(database_file, sqlselect) # Runs sql query procedure
+        if len(rows) == 0: ### This checks that the user was found ###
+            info("Error","User does not exist") # Error message if the entered details are not found in the databse
+        else:
+            # check pw
+            #sqlselect = ["SELECT * FROM User_Table WHERE user_password=?", (login_password_input.value,)]
+            #rows = query_database(database_file, sqlselect) # Runs sql query procedure
+            if login_password_input.value == rows[0][2]:
+                info("Log in","Success")
+                global glb_user_logged_in
+                glb_user_logged_in = rows[0][0]
+                landing_page_window.show()
+                login_window.hide()
+            else:
+                info("Error","Password is incorrect")
+
+
+# Login window
+login_window = Window(app, title = 'Login page', height = 250, width = 400) # Creeate login window
+login_box = Box(login_window, align = 'top', width = 'fill', height = 'fill', layout = 'grid') # Create box in login window
+login_lable = Text(login_box, text = 'Login', grid = [1,0]) # Adds lable to login window
+login_blank_column1 = Text(login_window, text = ' ', grid = [2,0]) # Creates space between two columns to improve appearance
+login_logo = Picture(login_box, image = 'hotel_logo.png', grid = [3,0], height = 50, width = 70) # Add logo to login window
+login_username_lable = Text(login_box, text = 'Enter username:', width = 15, grid = [0,1]) 
+login_username_input = TextBox(login_box, width = 20, grid = [1,1])
+login_password_lable = Text(login_box, text = 'Enter password:', width = 15, grid = [0,2]) # Where user inputs password + program sanitizes password on input
+login_password_input = TextBox(login_box, width = 20, grid = [1,2], hide_text = True)
+login_login_button = PushButton(login_box, text = 'Login', grid = [1,3], width = 'fill', command = login_routine)
+login_change_password_button = PushButton(login_box, text = 'Change password', grid = [1,4], command = change_password_routine)
+login_back_button = PushButton(login_box, text = 'Back', grid = [3,5], command = back_to_main_menu)
+
+login_window.hide()
