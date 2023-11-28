@@ -1,0 +1,11 @@
+# Cookie policy window
+cookies_policy = open('cookies_policy.txt','r') # Opens the necesary file 
+cookies_window = Window(app, title = 'Cookies policy', height = 1000, width = 1150) # creates cookies policy window
+cookies_box = Box(cookies_window, align = 'top', width = 'fill', height = 'fill', layout = 'grid') # Adds box into cookies policy window with grid structure
+cookies_lable = Text(cookies_box, text = 'Cookies Policy', grid = [0,0], size = 20)
+cookies_blank_row1 = Text(cookies_box, text = '', grid = [0,1], height = 1)
+cookies_text = Text(cookies_box, text = cookies_policy.read(), grid = [0,2])
+cookies_blank_row2 = Text(cookies_box, text = '', grid = [0,3], height = 1)
+cookies_back_button = PushButton(cookies_box, text = 'I have read the Cookies policy', grid = [0,4], command = back_to_main_menu )# Adds back button into cookies policy box that runs the back to main menu procedure
+
+cookies_window.hide()
