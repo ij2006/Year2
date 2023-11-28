@@ -1,0 +1,50 @@
+def create_account_routine():
+    if sign_up_first_name_input.value == '':
+        info('Error', 'Enter your first name')  # If user has not made an entry an error message occurs
+    elif sign_up_surname_input.value == '':
+        info('Error', 'Enter your surname')  # If user has not made an entry an error message occurs
+    elif sign_up_email_input.value == '':
+        info('Error', 'Enter your email') # If user has not made an entry an error message occurs
+    elif sign_up_username_input.value == '':
+        info('Error', 'Enter a username') # If user has not made an entry an error message occurs
+    elif sign_up_password_input.value == '':
+        info('Error','Enter a password') # If user has not made an entry an error message occurs
+    elif sign_up_reenter_password_input.value == '':
+        info('Error','Enter a password') # If user has not made an entry an error message occurs
+    elif '@' not in sign_up_email_input.value:
+        info('Error', 'Email is not valid') # If user has not used an @ symbol in thei email an error message occurs
+    elif sign_up_password_input.value != sign_up_reenter_password_input.value:
+        info('Error', 'Passwords must match') # If the users password entries do not match an error message will inform them
+    elif len(sign_up_password_input.value) < 8:
+        info('Error', 'Password must be at least 8 characters long') # Asks the user to enter an 8 digit password if they have not
+    else:
+        # Create new user
+        global glb_user_logged_in
+        mysql4 = ("INSERT INTO User_Table(username, user_password, user_first_name, user_surname, user_email) VALUES ('"+ str(sign_up_username_input.value) + "','" + str(sign_up_password_input.value) + "','" + str(sign_up_first_name_input.value) + "','" + str(sign_up_surname_input.value) + "','" + str(sign_up_email_input.value) + "')")
+        glb_user_logged_in = execute_sql(database_file, mysql4)
+        info('Success','Account created')
+        landing_page_window_process()
+
+# Sign up window
+sign_up_window = Window(app, title = 'Sign up page', height = 300, width = 400) # Creeate sign up window
+sign_up_box = Box(sign_up_window, align = 'top', width = 'fill', height = 'fill', layout = 'grid') # Create box in aign up window
+sign_up_lable = Text(sign_up_box, text = 'Sign up', grid = [1,0]) # Adds lable to sign up window
+sign_up_blank_column1 = Text(sign_up_box, text = ' ', grid = [2,0]) # Creates space between two columns to improve appearance
+sign_up_logo = Picture(sign_up_box, image = 'hotel_logo.png', grid = [3,0], height = 50, width = 70) # Add logo to sign up window
+sign_up_first_name_lable = Text(sign_up_box, text = 'Enter first name:', width = 15, grid = [0,1], align = '') 
+sign_up_first_name_input = TextBox(sign_up_box, width = 20, grid = [1,1])
+sign_up_surname_lable = Text(sign_up_box, text = 'Enter surname:', width = 15, grid = [0,2]) 
+sign_up_surname_input = TextBox(sign_up_box, width = 20, grid = [1,2])
+sign_up_email_lable = Text(sign_up_box, text = 'Enter email:', width = 15, grid = [0,3]) 
+sign_up_email_input = TextBox(sign_up_box, width = 20, grid = [1,3])
+sign_up_username_lable = Text(sign_up_box, text = 'Enter username:', width = 15, grid = [0,4]) 
+sign_up_username_input = TextBox(sign_up_box, width = 20, grid = [1,4])
+sign_up_password_lable = Text(sign_up_box, text = 'Enter password:', width = 15, grid = [0,5]) # Where user inputs password + program sanitizes password on input
+sign_up_password_input = TextBox(sign_up_box, width = 20, grid = [1,5], hide_text = True)
+sign_up_reenter_password_lable = Text(sign_up_box, text = 'ReEnter password:', width = 15, grid = [0,6]) # Where user inputs password + program sanitizes password on input
+sign_up_reenter_password_input = TextBox(sign_up_box, width = 20, grid = [1,6], hide_text = True)
+sign_up_blank_row1 = Text(sign_up_box, text = ' ', grid = [0,7]) # Creates space between two rows to improve appearance
+sign_up_create_account_button = PushButton(sign_up_box, text = 'Create account',grid = [1,8], command = create_account_routine) # Create account button to promt create account routine function
+sign_up_back_button = PushButton(sign_up_box, text = 'Back', grid = [2,8], command = back_to_main_menu) # Adds back button into sign up box that runs the back to main menu procedure
+
+sign_up_window.hide()
