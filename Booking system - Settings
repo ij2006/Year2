@@ -1,0 +1,25 @@
+def settings_light_mode_procedure():
+    # Changes app colour to origonal for light mode function
+    app.bg = None
+    app.text_color = None
+
+def settings_dark_mode_procedure():
+    # Changes app dark grey to origonal for dark mode function
+    app.bg = 'Dark grey'
+    app.text_color = 'White'
+
+# Settings window
+settings_window = Window(app, title = 'Settings page', height = 300, width = 470) # Creeate sign up window
+settings_box = Box(settings_window, align = 'top', width = 'fill', height = 'fill', layout = 'grid') # Create box in aign up window
+settings_blank_column1 = Text(settings_box, text = ' ', grid = [0,0], width = 5)
+settings_lable = Text(settings_box, text = 'Settings', size = 15, grid = [2,0]) # Adds lable to sign up window
+settings_blank_row1 = Text(settings_box, text = ' ', grid = [0,1])
+settings_light_mode_button = PushButton(settings_box, text = 'Light mode', height = 4, width = 15, grid = [1,2], command = settings_light_mode_procedure) # Adds button into settings box that runs the light mode procedure
+settings_blank_column2 = Text(settings_box, text = ' ', grid = [2,2], width = 1)
+settings_dark_mode_button = PushButton(settings_box, text = 'Dark mode', height = 4, width = 15, grid = [3,2], command = settings_dark_mode_procedure)  # Adds button into settings box that runs the dark mode procedure
+settings_blank_row2 = Text(settings_box, text = ' ', grid = [0,3])
+settings_text_size_combo = Combo(settings_box, grid = [2,4], options = ['Small', 'Medium', 'Large'], command = settings_size_combo_procedure)  # Adds button into settings box that runs the changing size procedure
+settings_blank_row3 = Text(settings_box, text = ' ', grid = [0,5])
+settings_back_button = PushButton(settings_box, text = 'Back', grid = [3,6], align = 'right', width = 10, command = back_to_main_menu) # Adds back button into settings box that runs the back to main menu procedure
+
+settings_window.hide()
