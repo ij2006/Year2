@@ -1,0 +1,42 @@
+def find_selected_booking(selected):
+    # Selects the details from the chosen booking on database and outputs information accordingly
+    info('','Searching booking...')
+    booking_identification= selected[0]
+    sqlselect = "SELECT * FROM Booking_Table WHERE bookingID = "+str(booking_identification) # Find all bookings in database before today
+    rows = query_database(database_file, sqlselect) # Runs sql query procedure
+    if len(rows) == 0: ### This checks that the user was found ###
+        info("Error","This user does not have any past bookings")
+    view_past_bookings_booking_reference.value = rows[0][0] # Assigns correct values to correct texboxes to output booking information
+    view_past_bookings_booking_num_people.value = rows[0][1]
+    view_past_bookings_booking_num_rooms.value = rows[0][2]
+    view_past_bookings_booking_location.value = rows[0][3]
+    view_past_bookings_booking_start_date.value = rows[0][4]
+    view_past_bookings_booking_end_date.value = rows[0][5]
+
+# View past bookings window
+view_past_bookings_window = Window(app, title = 'View past bookings', height = 380, width = 650) # Creates past booking window
+View_past_bookings_box = Box(view_past_bookings_window, align = 'top', width = 'fill', height = 'fill', layout = 'grid') # # Creates box inside past booking window
+view_past_bookings_logo = Picture(View_past_bookings_box, image = 'hotel_logo.png', grid = [4,0], height = 50, width = 70, align = 'right') # Add logo to make booking window
+view_past_bookings_blank_column1 = Text(View_past_bookings_box, text = ' ', grid = [0,0], width = 10) # Creates space between two columns to improve appearance
+view_past_bookings_blank_column2 = Text(View_past_bookings_box, text = ' ', grid = [3,0], width = 10) # Creates space between two columns to improve appearance
+view_past_bookings_lable1 = Text(View_past_bookings_box, text = 'Previous bookings', size = 15, grid = [1,0])
+view_past_bookings_blank_row1 = Text(View_past_bookings_box, text = ' ', grid = [1,1]) # Creates space between two rows to improve appearance
+view_past_bookings_lable2 = Text(View_past_bookings_box, text = 'Select booking reference:', grid = [1,2])
+view_past_bookings_combo = Combo(View_past_bookings_box, grid = [1,3], command = find_selected_booking)
+view_past_bookings_blank_row2 = Text(View_past_bookings_box, text = ' ', grid = [1,4]) # Creates space between two rows to improve appearance
+view_past_bookings_blank_row3 = Text(View_past_bookings_box, text = ' ', grid = [1,6]) # Creates space between two rows to improve appearance
+view_past_bookings_back_button = PushButton(View_past_bookings_box, text = 'Back', width = 10, grid = [4,12], command = back_to_landing_page) # Creates button that runs procedure back to landing page
+view_past_bookings_booking_reference_lable = Text(View_past_bookings_box, text = 'Booking reference:', grid = [1,7], width = 15) 
+view_past_bookings_booking_reference = TextBox(View_past_bookings_box, grid = [2,7], width = 20)
+view_past_bookings_booking_num_people_lable = Text(View_past_bookings_box, text = 'Number of people:', grid = [1,8], width = 15) 
+view_past_bookings_booking_num_people = TextBox(View_past_bookings_box, grid = [2,8], width = 20)
+view_past_bookings_booking_num_rooms_lable = Text(View_past_bookings_box, text = 'Number of rooms:', grid = [1,9], width = 15) 
+view_past_bookings_booking_num_rooms = TextBox(View_past_bookings_box, grid = [2,9], width = 20)
+view_past_bookings_booking_location_lable = Text(View_past_bookings_box, text = 'Location:', grid = [1,10], width = 15) 
+view_past_bookings_booking_location = TextBox(View_past_bookings_box, grid = [2,10], width = 20)
+view_past_bookings_booking_start_date_lable = Text(View_past_bookings_box, text = 'Arrival date:', grid = [1,11], width = 15) 
+view_past_bookings_booking_start_date = TextBox(View_past_bookings_box, grid = [2,11], width = 20)
+view_past_bookings_booking_end_date_lable = Text(View_past_bookings_box, text = 'Checkout date:', grid = [1,12], width = 15) 
+view_past_bookings_booking_end_date = TextBox(View_past_bookings_box, grid = [2,12], width = 20)
+
+view_past_bookings_window.hide()
