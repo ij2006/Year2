@@ -1,0 +1,18 @@
+def query_database(database, query):# Executes sql funtion to select data
+    Lconn = sqlite3.connect(database)
+    curL = Lconn.cursor() # Uses a local curser
+    if type(query) == type([]):
+        curL.execute(query[0], query[1]) # Prevent sql injection only
+    else:
+        curL.execute(query)
+    rows = curL.fetchall()
+    curL.close()
+    return rows
+
+def execute_sql(database, sql_statement):
+    # Executes the sql statement to INSERT and UPDATE data
+	Loconn = sqlite3.connect(database)
+	cur = Loconn.cursor()
+	cur.execute(sql_statement)
+	Loconn.commit()
+	return cur.lastrowid
