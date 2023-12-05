@@ -1,0 +1,70 @@
+def graph1():
+    # Creating a scatter plot 
+    userID = 1
+    # Create dataframe
+    conn = sqlite3.connect(database_file)
+    cursor = conn.cursor()
+    cursor.execute("SELECT fitness_journal_calories, fitness_journal_date from Fitness_Journal_Table where userID =" + str(userID)+"")
+    df = pd.DataFrame(cursor.fetchall(), columns = ['fitness_journal_calories', 'fitness_journal_date'])
+    print(df)
+    # Create scatter plot
+    plt.scatter(df['fitness_journal_date'], df['fitness_journal_calories'].astype(int))
+    plt.xlabel('fitness_journal_date')
+    plt.ylabel('fitness_journal_calories')
+    plt.title('Calories burnt each day')
+    plt.show()
+
+
+def graph2():
+    # Creating a bar chart using groupby for the total
+    userID = 1
+    # Create dataframe
+    conn = sqlite3.connect(database_file)
+    cursor = conn.cursor()
+    cursor.execute("SELECT User_Table.userID, username, fitness_journal_calories from User_Table, Fitness_Journal_Table where User_Table.userID = Fitness_Journal_Table.userID")
+    df = pd.DataFrame(cursor.fetchall(), columns = ['userID', 'username', 'fitness_journal_calories'])
+    print(df)
+    # Goup by userID
+    dftotal = df.groupby(['userID'])['fitness_journal_calories'].sum().reset_index()
+    print(dftotal)
+    # Create chart
+    plt.bar(dftotal['userID'].astype(str), dftotal['fitness_journal_calories'])
+    plt.show()
+
+def graph3():
+    # Creating a bar chart using groupby for the average
+    userID = 1
+    # Create dataframe
+    conn = sqlite3.connect(database_file)
+    cursor = conn.cursor()
+    cursor.execute("SELECT User_Table.userID, username, fitness_journal_calories from User_Table, Fitness_Journal_Table where User_Table.userID = Fitness_Journal_Table.userID")
+    df = pd.DataFrame(cursor.fetchall(), columns = ['userID', 'username', 'fitness_journal_calories'])
+    print(df)
+
+    # Goup by userID
+    dfmean = df.groupby(['userID'])['fitness_journal_calories'].mean().reset_index()
+    print(dfmean)
+    # Create chart
+    plt.bar(dfmean['userID'].astype(str), dfmean['fitness_journal_calories'])
+    plt.show()
+
+
+def graph4():
+    # Creating a pie chart using groupby
+    userID = 1
+    # Create dataframe
+    conn = sqlite3.connect(database_file)
+    cursor = conn.cursor()
+    cursor.execute("SELECT User_Table.userID, username, fitness_journal_calories from User_Table, Fitness_Journal_Table where User_Table.userID = Fitness_Journal_Table.userID")
+    df = pd.DataFrame(cursor.fetchall(), columns = ['userID', 'username', 'fitness_journal_calories'])
+    print(df)
+
+    # Group by username
+    dftotal = df.groupby(['username'])['fitness_journal_calories'].sum().reset_index()
+    print(dftotal)
+
+    # Make the pie chart
+    mycolours = ['k','c']
+    plt.pie(dftotal['fitness_journal_calories'], labels = dftotal['username'], colors = mycolours)
+    plt.legend(title = 'Username')
+    plt.show()
