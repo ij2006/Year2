@@ -1,7 +1,7 @@
 def graph1():
     # Creating a scatter plot 
     userID = 1
-    # Create dataframe
+    # Join tables together using SQL and dreate dataframe
     conn = sqlite3.connect(database_file)
     cursor = conn.cursor()
     cursor.execute("SELECT fitness_journal_calories, fitness_journal_date from Fitness_Journal_Table where userID =" + str(userID)+"")
@@ -18,7 +18,7 @@ def graph1():
 def graph2():
     # Creating a bar chart using groupby for the total
     userID = 1
-    # Create dataframe
+    # Join tables together using SQL and dreate dataframe
     conn = sqlite3.connect(database_file)
     cursor = conn.cursor()
     cursor.execute("SELECT User_Table.userID, username, fitness_journal_calories from User_Table, Fitness_Journal_Table where User_Table.userID = Fitness_Journal_Table.userID")
@@ -34,7 +34,7 @@ def graph2():
 def graph3():
     # Creating a bar chart using groupby for the average
     userID = 1
-    # Create dataframe
+    # Join tables together using SQL and dreate dataframe
     conn = sqlite3.connect(database_file)
     cursor = conn.cursor()
     cursor.execute("SELECT User_Table.userID, username, fitness_journal_calories from User_Table, Fitness_Journal_Table where User_Table.userID = Fitness_Journal_Table.userID")
@@ -52,7 +52,7 @@ def graph3():
 def graph4():
     # Creating a pie chart using groupby
     userID = 1
-    # Create dataframe
+    # Join tables together using SQL and dreate dataframe
     conn = sqlite3.connect(database_file)
     cursor = conn.cursor()
     cursor.execute("SELECT User_Table.userID, username, fitness_journal_calories from User_Table, Fitness_Journal_Table where User_Table.userID = Fitness_Journal_Table.userID")
