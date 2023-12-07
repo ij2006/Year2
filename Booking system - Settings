@@ -8,6 +8,98 @@ def settings_dark_mode_procedure():
     app.bg = 'Dark grey'
     app.text_color = 'White'
 
+def settings_size_combo_procedure():
+    # This changes the window and text sizes based on the users choice
+    main_menu_window.show() # Error with resizeing when windows were closed so Have opened them all before they are changed to prevent error
+    tc_window.show()
+    login_window.show()
+    sign_up_window.show()
+    landing_page_window.show()
+    settings_window.show()
+    change_password_window.show()
+    view_past_bookings_window.show()
+    # Change text size and window size depending on users choice
+    if settings_text_size_combo.value == 'Small':
+        # If the user selects the small option then the text size will be set to 10 and window sizes will be changed accordingly
+        app.text_size = 12
+        settings_window.width = 470
+        settings_window.height = 300
+        main_menu_window.width = 600
+        main_menu_window.height = 400  
+        tc_window.width = 1000
+        tc_window.height = 550
+        cookies_window.width = 1150
+        cookies_window.height = 1000
+        login_window.width = 400
+        login_window.height = 200
+        sign_up_window.width = 400
+        sign_up_window.height = 300
+        landing_page_window.width = 970
+        landing_page_window.height = 400
+        change_password_window.width = 420
+        change_password_window.height = 250
+        view_past_bookings_window.width = 650
+        view_past_bookings_window.height = 380
+    elif settings_text_size_combo.value == 'Medium':
+        app.hide()
+        # If the user selects the small option then the text size will be set to 20 and window sizes will be changed accordingly
+        app.text_size = 20
+        settings_window.width = 850
+        settings_window.height = 600
+        main_menu_window.width = 1200
+        main_menu_window.height = 750
+        tc_window.width = 1050
+        tc_window.height = 550
+        tc_window.text_size = 12 # As the terms page is larger than others the text size needs to be smaller so that the page will fit on the screen
+        cookies_window.width = 110
+        cookies_window.height = 1000
+        cookies_window.text_size = 12 # As the cookies page is larger than others the text size needs to be smaller so that the page will fit on the screen
+        login_window.width = 700
+        login_window.height = 400
+        sign_up_window.width = 730
+        sign_up_window.height = 600
+        landing_page_window.width = 1740
+        landing_page_window.height = 700
+        change_password_window.width = 750
+        change_password_window.height = 400
+        view_past_bookings_window.width = 1250
+        view_past_bookings_window.height = 700
+    elif settings_text_size_combo.value == 'Large':
+        # If the user selects the small option then the text size will be set to 30 and window sizes will be changed accordingly
+        app.text_size = 30
+        settings_window.width = 1150
+        settings_window.height = 800
+        main_menu_window.width = 1700
+        main_menu_window.height = 1000
+        tc_window.width = 1000
+        tc_window.height = 550
+        tc_window.text_size = 12 # As the terms page is larger than others the text size needs to be smaller so that the page will fit on the screen
+        cookies_window.width = 1150
+        cookies_window.height = 1000
+        cookies_window.text_size = 12 # As the cookies page is larger than others the text size needs to be smaller so that the page will fit on the screen
+        login_window.width = 1000
+        login_window.height = 700
+        sign_up_window.width = 1010
+        sign_up_window.height = 900
+        landing_page_window.width = 3000
+        landing_page_window.height = 800
+        landing_page_window.text_size = 23 # As the landing page is larger than others the text size needs to be smaller so that the page will fit on the screen
+        change_password_window.width = 1100
+        change_password_window.height = 600
+        make_booking_window.width = 1600
+        make_booking_window.height = 400
+        view_past_bookings_window.width = 1500
+        view_past_bookings_window.height = 800
+    make_booking_window.text_size = 12
+    main_menu_window.hide() # Hidden all windows after being changed
+    tc_window.hide()
+    login_window.hide()
+    sign_up_window.hide()
+    landing_page_window.hide()
+    main_menu_window.hide()
+    change_password_window.hide()
+    view_past_bookings_window.hide()
+
 # Settings window
 settings_window = Window(app, title = 'Settings page', height = 300, width = 470) # Creeate sign up window
 settings_box = Box(settings_window, align = 'top', width = 'fill', height = 'fill', layout = 'grid') # Create box in aign up window
