@@ -16,7 +16,7 @@ def find_selected_booking(selected):
 def view_past_bookings_process():
     # Use sql to find past bookings and populate combo box
     today_formatted = datetime.date.today() # Get todays date
-    today_string = datetime.datetime.strftime(today_formatted, "'%Y-%m-%d'") # Format as YYYY-MM-DD 
+    today_string = datetime.datetime.strftime(today_formatted, "%Y-%m-%d") # Format as YYYY-MM-DD 
     sqlselect = "SELECT * FROM Booking_Table WHERE userID = '"+str(glb_user_logged_in)+"'AND booking_start_date < "+today_string+" " # Find all bookings in database before today
     rows = query_database(database_file, sqlselect) # Runs sql query procedure
     if len(rows) == 0: ### This checks that the user was found ###
