@@ -13,6 +13,25 @@ def find_selected_booking(selected):
     view_past_bookings_booking_start_date.value = rows[0][4]
     view_past_bookings_booking_end_date.value = rows[0][5]
 
+def view_past_bookings_process():
+    # Use sql to find past bookings and populate combo box
+    today_formatted = datetime.date.today() # Get todays date
+    today_string = datetime.datetime.strftime(today_formatted, "'%Y-%m-%d'") # Format as YYYY-MM-DD 
+    sqlselect = "SELECT * FROM Booking_Table WHERE userID = '"+str(glb_user_logged_in)+"'AND booking_start_date < "+today_string+" " # Find all bookings in database before today
+    rows = query_database(database_file, sqlselect) # Runs sql query procedure
+    if len(rows) == 0: ### This checks that the user was found ###
+        info("Error","This user does not have any past bookings")
+    else:
+        # Load combo box with bookings
+        num_bookings = len(rows)
+        for booking in range(num_bookings):
+            create_combo_ref = str(rows[booking][0]) + " " + rows[booking][3]
+           # view_past_bookings_combo.append(rows[booking])
+            view_past_bookings_combo.append(create_combo_ref)
+
+    landing_page_window.hide() # Only shows the correct window by hiding the out of use ones
+    view_past_bookings_window.show()
+
 # View past bookings window
 view_past_bookings_window = Window(app, title = 'View past bookings', height = 380, width = 650) # Creates past booking window
 View_past_bookings_box = Box(view_past_bookings_window, align = 'top', width = 'fill', height = 'fill', layout = 'grid') # # Creates box inside past booking window
