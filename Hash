@@ -1,0 +1,18 @@
+import hashlib
+# Now try some of your own text to see what the hash looks like
+mytext = "Password!"
+myhash = hashlib.sha512(mytext.encode('utf8')).hexdigest()
+print(myhash)
+#
+# store myhash in a file
+# read myhash of the password 'asd'
+# compare with input that is then hashed
+# assume expectedhash is read from database/file
+#
+expectedhash = "a1ec99da79c2e8a27adf13a7069544d6e665d8238a97816d4ceda3b3a46636621db91ab101788fae08c0a69abc300631ca9c381bf3a7fe1701980543653ebdc9"
+password = input("what is your password?\n")
+passwordhash = hashlib.sha512(password.encode('utf8')).hexdigest()
+if expectedhash == passwordhash:
+	print("match")
+else:
+	print("stored password does not match")
