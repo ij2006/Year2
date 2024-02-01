@@ -1,0 +1,97 @@
+def go_to_premium_fitness():
+    # Opens premium fitness content window
+    global glb_user_type
+    if glb_user_type == 0:
+        info('Premium','Sign up for premium now to access this content')
+    else:
+        dashboard_window.hide()
+        global goal_weight_message
+        #
+        goal_weight_float = get_goal_weight()
+        goal_weight_message = "Goal weight: " + str(goal_weight_float)
+        print(goal_weight_message)
+        premium_fitness_goal_weight.value = goal_weight_message
+       
+        premium_fitness_window.show()
+
+
+
+def go_to_premium_health():
+    # Opens premium fitness content window
+    global glb_user_type
+    if glb_user_type == 0:
+        info('Premium','Sign up for premium now to access this content')
+    else:
+        dashboard_window.hide()
+        premium_health_window.show()
+
+
+
+def go_to_free_fitness():
+    # Show free fitness window and hide the linked windows
+    free_fitness_window.show()
+    dashboard_window.hide()
+
+
+def go_to_free_health():
+    # Show free health window and hide the linked windows
+    free_health_window.show()
+    dashboard_window.hide()
+
+
+def go_to_subscribe():
+    # Clear textboxes to improve data privacy and comply with GDPR
+    subscribe_weight_input.clear()
+    subscribe_DOB_input.clear()
+    subscribe_height_input.clear()
+    subscribe_card_input.clear()
+    # Show subscribe window and hide the linked windows
+    subscribe_window.show()
+    dashboard_window.hide()
+    free_fitness_window.hide()
+    free_health_window.hide()
+
+
+
+########################
+# # Dashboard window # #
+########################
+# Create window + box
+dashboard_window =  Window(app, title = 'Options', height = 450, width = 1150) # Creeate landing page window
+dashboard_box = Box(dashboard_window, align = 'top', width = 1100, height = 'fill', layout = 'grid') # Create box in aign up window
+# Fill box
+dashboard_lable = Text(dashboard_box, text = 'Select the function you wish to use', grid = [1,0], size = 20) # Adds lable to dashboard
+dashboard_logo = Picture(dashboard_box, image = 'Toka_Logo.png', grid = [5,0], height = 50, width = 90) # Add logo to sign up window
+dashboard_premium_title = Text(dashboard_box, text = 'Premium', size = 18, grid = [0,2], align = 'right')
+dashboard_taster_title = Text(dashboard_box, text = 'Taster', size = 18, grid = [2,2], align = 'right')
+dashboard_premium_fitness_icon = Picture(dashboard_box, image = 'Fitness_icon.png', grid = [0,3], width = 90, height = 90, align = 'right') 
+dashboard_premium_fitness_button = PushButton(dashboard_box, text = 'Fitness content', grid = [1,3], align = 'left', command = go_to_premium_fitness)
+dashboard_premium_health_icon = Picture(dashboard_box, image = 'Health_icon.png', grid = [0,4], width = 90, height = 90, align = 'right') 
+dashboard_premium_health_button = PushButton(dashboard_box, text = 'Health content', grid = [1,4], align = 'left', command = go_to_premium_health)
+dashboard_free_fitness_icon = Picture(dashboard_box, image = 'Fitness_icon.png', grid = [2,3], width = 90, height = 90, align = 'left')
+dashboard_free_fitness_button = PushButton(dashboard_box, text = 'Fitness content', grid = [3,3], command = go_to_free_fitness)
+dashboard_free_health_icon = Picture(dashboard_box, image = 'Health_icon.png', grid = [2,4], width = 90, height = 90, align = 'left')
+dashboard_free_health_button = PushButton(dashboard_box, text = 'Health content', grid = [3,4], command = go_to_free_health)
+dashboard_subscribe_link = Text(dashboard_box, text = 'SUBSCRIBE!', grid = [5,3], size = 20, align = 'bottom')
+dashboard_subscribe_link.when_clicked = go_to_subscribe
+dashboard_subscribe_continued_link = Text(dashboard_box, text = 'For just £9.99 a month!!!', grid = [5,4], size = 10, align = 'top')
+dashboard_subscribe_continued_link.when_clicked = go_to_subscribe
+dashboard_back_button = PushButton(dashboard_box, text = 'Back', grid = [5,5], width = 15, height = 2, command = go_to_login_window) # Adds back button into dashboard box that runs the back to main menu procedure
+# Imporve layout of window
+dashboard_blank_column1 = Text(dashboard_box, text = ' ', grid = [0,0], width = 20) # Creates space between two columns to improve appearance
+dashboard_blank_column2 = Text(dashboard_box, text = ' ', grid = [4,2], width = 5) # Creates space between two columns to improve appearance
+# Create colour scheme
+dashboard_lable.text_color = pink
+dashboard_window.bg = light_purple
+dashboard_box.bg = 'white'
+dashboard_back_button.bg = light_purple
+dashboard_premium_title.text_color = pink
+dashboard_taster_title.text_color = pink
+dashboard_subscribe_link.text_color = light_purple
+dashboard_subscribe_continued_link.text_color = light_purple
+dashboard_premium_fitness_button.bg = light_blue
+dashboard_premium_health_button.bg = light_blue
+dashboard_free_fitness_button.bg = light_blue
+dashboard_free_health_button.bg = light_blue
+# Hide window
+dashboard_window.hide()
