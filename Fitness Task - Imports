@@ -1,0 +1,17 @@
+########################
+# # Import libraries # #
+######################## 
+
+from guizero import App, Window, Text, TextBox, Box, PushButton, Combo, info, Picture, CheckBox # Imports that allow guizero functionality
+import sqlite3 # Import sql in order to create my database
+import os # Import os libraries in order to reset the database
+import os.path
+from dateutil.relativedelta import * # Import various date time libraries in order to validate dates and get todays date
+import datetime
+from datetime import date
+#from datetime import datetime # Needed to import locally as conflicts with using from datetime import date
+import hashlib # Library for hashing password and keeping it secure
+import pandas as pd # Importing pandas in order to create dataframes 
+import matplotlib.pyplot as plt # Importing matplotlib in order to create graphs out of the pandas dataframes
+import webbrowser # Import webbrowser in order to open websites from links
+plt.rcParams['toolbar'] = 'None' # Remove toolbar from plots
