@@ -1,0 +1,11 @@
+def check_number(num_string, field_name, min, max):
+    # Validate that a number is between the minimum and maximum value to return True or False
+    try:
+        num = float(num_string)
+    except ValueError:
+        info('Error',field_name + ' must be numeric')
+        return False
+    if num < min or num > max:
+        return False # Return False if number is not valid
+    else: 
+        return True # Return True if number is valid
