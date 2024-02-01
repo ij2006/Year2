@@ -1,0 +1,90 @@
+def settings_light_mode_procedure():
+    # Change the settings windo colours to the light mode colour scheme
+    settings_window.text_color = 'black'
+    settings_window.bg = light_purple
+    settings_box.bg = 'white'
+    settings_light_mode_button.bg = light_purple
+    settings_dark_mode_button.bg = light_purple
+    settings_text_size_combo.bg = light_purple
+    settings_back_button.bg = light_purple
+
+
+
+def settings_dark_mode_procedure():
+    # Change the settings windo colours to the dark mode colour scheme
+    settings_window.text_color = 'white'
+    settings_window.bg = green
+    settings_box.bg = 'black'
+    settings_light_mode_button.bg = green
+    settings_dark_mode_button.bg = green
+    settings_text_size_combo.bg = green
+    settings_back_button.bg = green
+
+
+
+def settings_text_size_procedure():
+    #not working well and move up to def sections 
+    if settings_text_size_combo.value == 'Small':
+        settings_window.text_size = 12
+        settings_lable.text_size = 20
+        settings_text_size_lable.text_size = 10
+        settings_window.height = 325
+        settings_window.width = 540
+        settings_box.width = 490
+        settings_light_mode_button.resize(15, 4)
+        settings_dark_mode_button.height = 4
+        settings_dark_mode_button.width = 15
+        settings_back_button.width = 10
+        settings_blank_column1.width = 5
+        settings_blank_row3.height = 3
+    elif settings_text_size_combo.value == 'Large':
+        settings_window.text_size = 13
+        settings_lable.text_size = 25
+        settings_window.height = 375
+        settings_window.width = 600
+        settings_box.width = 540
+        settings_light_mode_button.height = 4
+        settings_light_mode_button.width = 15
+        settings_dark_mode_button.height = 4
+        settings_dark_mode_button.width = 15
+        settings_back_button.width = 10
+        settings_lable.width = 20
+
+
+def go_to_main_menu():
+    # Show main menu window and hide the linked windows
+    main_menu_window.show()
+    sign_up_window.hide()
+    login_window.hide()
+    settings_window.hide()
+
+
+#######################
+# # Settings window # #
+#######################
+# Create window + box
+settings_window = Window(app, title = 'Settings', height = 325, width = 540) # Creeate sign up window
+settings_box = Box(settings_window, align = 'top', width = 490, height = 'fill', layout = 'grid') # Create box in aign up window
+# Fill box
+settings_lable = Text(settings_box, text = 'Alter your preferences', size = 20, grid = [1,0]) # Adds lable to sign up window
+settings_logo = Picture(settings_box, image = 'Toka_Logo.png', grid = [3,0], height = 50, width = 90) # Add logo to login window
+settings_light_dark_mode_lable = Text(settings_box, text = 'Select your colour mode preference here:', grid = [1,2], align = 'Bottom') # Adds lable to sign up window
+settings_light_mode_button = PushButton(settings_box, text = 'Light mode', height = 4, width = 15, grid = [1,3], align = 'left', command = settings_light_mode_procedure) # Adds button into settings box that runs the light mode procedure
+settings_dark_mode_button = PushButton(settings_box, text = 'Dark mode', height = 4, width = 15, grid = [1,3], align = 'right', command = settings_dark_mode_procedure)  # Adds button into settings box that runs the dark mode procedure
+settings_text_size_lable = Text(settings_box, text = 'Select your text size preference here:', size = 10, grid = [1,5], align = 'left') # Adds lable to sign up window
+settings_text_size_combo = Combo(settings_box, grid = [1,5], options = ['Small', 'Large'], align = 'right', command = settings_text_size_procedure)  # Adds button into settings box that runs the changing size procedure
+settings_back_button = PushButton(settings_box, text = 'Back', grid = [3,6], align = 'bottom', width = 10, command = go_to_main_menu) # Adds back button into settings box that runs the back to main menu procedure
+# Improve layout of box
+settings_blank_column1 = Text(settings_box, text = ' ', grid = [0,0], width = 5)
+settings_blank_row1 = Text(settings_box, text = ' ', grid = [0,1])
+settings_blank_row2 = Text(settings_box, text = ' ', grid = [0,4])
+settings_blank_row3 = Text(settings_box, text = ' ', grid = [0,6], height = 3)
+# Create colour scheme
+settings_window.bg = light_purple
+settings_box.bg = 'white'
+settings_light_mode_button.bg = light_purple
+settings_dark_mode_button.bg = light_purple
+settings_text_size_combo.bg = light_purple
+settings_back_button.bg = light_purple
+# Hide window
+settings_window.hide()
