@@ -1,0 +1,17 @@
+def check_age(DOB_str):
+    # Check that the entered DOB means that the user is over 18
+    # Get the current date
+    today = date.today()
+    # Break the date into into yyyy, mm, dd
+    yyyy = DOB_str[0:4]
+    mm = DOB_str[5:7]
+    dd = DOB_str[8:10]
+    # Convert the separated string date into a real date
+    dob = date(int(yyyy),int(mm),int(dd))
+    age = relativedelta(today, dob)
+    age = age.years
+    # Return true if the user is over 18 and false if they are under 18
+    if age >= 18:
+        return True
+    else: 
+        return False
