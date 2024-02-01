@@ -1,0 +1,61 @@
+################################################
+# # Create database using DDL sql statements # #
+################################################
+
+# Create database to store user details in three tables
+sql = """
+CREATE TABLE "User_Table"(
+    "userID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "username" TEXT,
+    "user_password" TEXT,
+    "user_first_name" TEXT,
+    "user_surname" TEXT,
+    "user_email" TEXT,
+    "user_premium_status" TEXT,
+    "user_weight" FLOAT, 
+    "user_DOB" DATE,
+    "user_height" FLOAT,
+    "user_diet_preference" TEXT,
+    "user_goal_weight" FLOAT,
+    "user_card_number" TEXT
+);
+CREATE TABLE "Health_Journal_Table"(
+    "health_journal_ID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "health_journal_date" TEXT,
+    "health_journal_entry" TEXT,
+    "health_journal_mood" INTEGER, 
+    "health_journal_calories" INTEGER,
+    "health_journal_water" FLOAT,
+    "userID" INTEGER,
+    CONSTRAINT "userID" FOREIGN KEY ("userID") REFERENCES "User_Table"("userID")
+);
+CREATE TABLE "Fitness_Journal_Table"(
+    "fitness_journal_ID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "fitness_journal_date" DATE,
+    "fitness_journal_entry" TEXT,
+    "fitness_journal_workout" TEXT, 
+    "fitness_journal_weight" FLOAT,
+    "fitness_journal_calories" INTEGER,
+    "userID" INTEGER,
+    CONSTRAINT "userID" FOREIGN KEY ("userID") REFERENCES "User_Table"("userID")
+);
+CREATE TABLE "Activity_Table"(
+    "activityID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "activity_type" TEXT,
+    "activity_calories" INTEGER
+);
+
+insert into User_Table (username, user_password, user_first_name, user_surname, user_email, user_premium_status) values ('user1', 'a1ec99da79c2e8a27adf13a7069544d6e665d8238a97816d4ceda3b3a46636621db91ab101788fae08c0a69abc300631ca9c381bf3a7fe1701980543653ebdc9', 'Test', 'SurTest', 'testuser@email.com', 'False');
+insert into User_Table (username, user_password, user_first_name, user_surname, user_email, user_premium_status, user_weight, user_DOB, user_height, user_diet_preference, user_goal_weight, user_card_number) values ('user2', 'a1ec99da79c2e8a27adf13a7069544d6e665d8238a97816d4ceda3b3a46636621db91ab101788fae08c0a69abc300631ca9c381bf3a7fe1701980543653ebdc9', 'Test2', 'SurTest2', 'testuser2@email.com', 'True', '65', '2000-09-17', '178', 'Vegan', 58, '1234567890123456');
+insert into User_Table (username, user_password, user_first_name, user_surname, user_email, user_premium_status, user_weight, user_DOB, user_height, user_diet_preference, user_goal_weight, user_card_number) values ('user3', 'a1ec99da79c2e8a27adf13a7069544d6e665d8238a97816d4ceda3b3a46636621db91ab101788fae08c0a69abc300631ca9c381bf3a7fe1701980543653ebdc9', 'Test3', 'SurTest3', 'testuser3@email.com', 'True', '87', '2000-10-06', '198', 'Vegetarian', '93', '1111222233334444');
+insert into Health_Journal_Table (health_journal_date, health_journal_entry, health_journal_mood, health_journal_calories, health_journal_water, userID) values ('12/08/2022', 'Great!', '4', '3500', '2.4', '2');
+insert into Health_Journal_Table (health_journal_date, health_journal_entry, health_journal_mood, health_journal_calories, health_journal_water, userID) values ('26/09/2022', 'Bad!', '1', '6000', '1', '2');
+insert into Health_Journal_Table (health_journal_date, health_journal_entry, health_journal_mood, health_journal_calories, health_journal_water, userID) values ('22/08/2022', 'Good!', '4', '2400', '3.4', '3');
+insert into Health_Journal_Table (health_journal_date, health_journal_entry, health_journal_mood, health_journal_calories, health_journal_water, userID) values ('16/09/2022', 'Alight', '3', '5000', '4', '3');
+insert into Fitness_Journal_Table (fitness_journal_date, fitness_journal_entry, fitness_journal_workout, fitness_journal_weight, fitness_journal_calories, userID) values ('12/08/2022', 'Bad', 'Swimming', '65', '50', '2');
+insert into Fitness_Journal_Table (fitness_journal_date, fitness_journal_entry, fitness_journal_workout, fitness_journal_weight, fitness_journal_calories, userID) values ('15/09/2022', 'Great', 'Running', '64', '70', '2');
+insert into Fitness_Journal_Table (fitness_journal_date, fitness_journal_entry, fitness_journal_workout, fitness_journal_weight, fitness_journal_calories, userID) values ('20/09/2022', 'Okay', 'Running', '54', '22', '3');
+insert into Activity_Table (activity_type, activity_calories) values ('Swimming', '223');
+insert into Activity_Table (activity_type, activity_calories) values ('Running', '700');
+
+"""
