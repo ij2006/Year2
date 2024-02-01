@@ -1,0 +1,7 @@
+def get_goal_weight():
+    # Select from the database the users details in order to get their goal weight
+    global glb_user_logged_in
+    sql_select = "SELECT * FROM User_Table WHERE UserID ='"+ str(glb_user_logged_in)+"'" # Sql select all logged in users details
+    get_rows =  query_database(database_file, sql_select)  # Query the database
+    goal_weight = get_rows[0][11]
+    return goal_weight
