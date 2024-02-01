@@ -1,0 +1,11 @@
+def check_date_format(DOB_date):
+    from datetime import datetime # Import locally as needed strptime function 
+    date_format = '%Y-%m-%d'
+      # using try-except blocks for handling the exceptions
+    try:
+        # formatting the date using strptime() function
+        dateObject = datetime.strptime(DOB_date, date_format)
+        return True
+    # If the date validation goes wrong
+    except ValueError:
+        return False
