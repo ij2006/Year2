@@ -1,0 +1,4 @@
+def get_todays_date():
+    today_formatted = datetime.date.today() # Get todays date
+    today_string = datetime.datetime.strftime(today_formatted, "%Y-%m-%d") # Format as YYYY-MM-DD 
+    return today_string
