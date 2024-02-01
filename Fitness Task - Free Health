@@ -1,0 +1,104 @@
+def go_to_dashboard():
+    # Show dashboard window and hide the linked windows
+    dashboard_window.show()
+    premium_fitness_window.hide()
+    premium_health_window.hide()
+    subscribe_window.hide()
+    free_fitness_window.hide()
+    free_health_window.hide()
+    sign_up_window.hide()
+
+
+def sleep_poster():
+    # Changes health poster to sleep poster
+    free_health_poster.image = 'Sleep_poster.jpg'
+
+
+
+def eating_poster():
+    # Changes health poster to eating poster
+    free_health_poster.image = 'Eating_poster.jpg'
+
+
+
+def mental_health_poster():
+    # Changes health poster to mental health poster
+    free_health_poster.image = 'Mental_Health_poster.jpg'
+
+
+def go_to_subscribe():
+    # Clear textboxes to improve data privacy and comply with GDPR
+    subscribe_weight_input.clear()
+    subscribe_DOB_input.clear()
+    subscribe_height_input.clear()
+    subscribe_card_input.clear()
+    # Show subscribe window and hide the linked windows
+    subscribe_window.show()
+    dashboard_window.hide()
+    free_fitness_window.hide()
+    free_health_window.hide()
+
+
+###########################
+# # Free health advice # #
+###########################
+# Create window + box #
+free_health_window = Window(app, title = 'Free fitness content', height = 700, width = 1125)
+free_health_box = Box(free_health_window, align = 'top', width = 1075, height = 'fill', layout = 'grid')
+# Fill window #
+# Main box 
+free_health_logo = Picture(free_health_box, image = 'Toka_Logo.png', grid = [5,0], align = 'right', height = 50, width = 90) # Add free fitness content window
+free_health_icon = Picture(free_health_box, image = 'Fitness_icon.png', grid = [4,0], height = 50, width = 50, align = 'left') # Add free fitness content window
+free_health_title = Text(free_health_box, text = 'Health advice', grid = [3,0], align = 'right', size = 35) # Adds lable to free fitness content window
+free_health_back_button = PushButton(free_health_box, text = 'Back', grid = [5,4], width = 15, height = 2, align = 'right', command = go_to_dashboard) 
+free_health_poster = Picture(free_health_box, image = 'Sleep_poster.jpg', grid = [3,2], height = 500, width = 400, align = 'left') # Add free fitness content window
+# Left box
+free_health_left_box = Box(free_health_box, grid = [1,2], width = 300, height = 500, layout = 'grid', border = True)
+free_health_sleep_button = PushButton(free_health_left_box, text = 'Sleep', grid = [1,1], align = 'right', width = 25, height = 6, command = sleep_poster)
+free_health_eating_button = PushButton(free_health_left_box, text = 'Eating', grid = [1,3], align = 'right', width = 25, height = 6, command = eating_poster)
+free_health_mental_health_button = PushButton(free_health_left_box, text = 'Mental health', grid = [1,5], align = 'right', width = 25, height = 6, command = mental_health_poster)
+# Subscribe box
+free_health_subscribe_box = Box(free_health_box, grid = [5,2], width = 300, height = 500, layout = 'grid', border = True)
+free_health_subscribe_lable = Text(free_health_subscribe_box, text = 'Subscribe!', grid = [1,1], size = 25)
+free_health_subscribe_message = Text(free_health_subscribe_box, text = 'Click below to subscribe\nto a premium account\nand access even more\nhealth and fitness\ncontent!!!', grid = [1,3])
+free_health_subscribe_message2 = Text(free_health_subscribe_box, text = 'For just £9.99 a\nmonth!!!', size = 15, grid = [1,5])
+free_health_subscribe_button = PushButton(free_health_subscribe_box, text = 'Get a premium \naccount HERE!', grid = [1,7], width = 15, height = 3, command = go_to_subscribe)
+# Improve layout of window #
+# Main box
+free_health_blank_column1 = Text(free_health_box, text = ' ', grid = [0,0], width = 4) # Creates space between two columns to improve appearance
+free_health_blank_column2 = Text(free_health_box, text = ' ', grid = [2,0], width = 4) # Creates space between two columns to improve appearance
+free_health_blank_column3 = Text(free_health_box, text = ' ', grid = [4,1], width = 4) # Creates space between two columns to improve appearance
+free_health_blank_row1 = Text(free_health_box, text = ' ', grid = [0,1], height = 1) # Creates space between two rows to improve appearance
+free_health_blank_row2 = Text(free_health_box, text = ' ', grid = [0,3], height = 1) # Creates space between two rows to improve appearance
+# Left box
+free_health_left_box_blank_row1 = Text(free_health_left_box, text = ' ', grid = [0,0], height = 2, width = 2) # Creates space between two rows to improve appearance
+free_health_left_box_blank_row2 = Text(free_health_left_box, text = ' ', grid = [2,6], height = 2, width = 2) # Creates space between two rows to improve appearance
+free_health_left_box_blank_row3 = Text(free_health_left_box, text = ' ', grid = [0,2], height = 1) # Creates space between two rows to improve appearance
+free_health_left_box_blank_row3 = Text(free_health_left_box, text = ' ', grid = [0,4], height = 1) # Creates space between two rows to improve appearance
+# Subscribe box
+free_health_subscribe_blank_column1 = Text(free_health_subscribe_box, text = ' ', grid = [0,0], width = 2, height = 2) # Creates space between two columns to improve appearance
+free_health_subscribe_blank_column2 = Text(free_health_subscribe_box, text = ' ', grid = [2,8], width = 2, height = 2) # Creates space between two columns to improve appearance
+free_health_subscribe_blank_row1 = Text(free_health_subscribe_box, text = ' ', grid = [0,2], height = 1) # Creates space between two rows to improve appearance
+free_health_subscribe_blank_row2 = Text(free_health_subscribe_box, text = ' ', grid = [0,4], height = 1) # Creates space between two rows to improve appearance
+free_health_subscribe_blank_row3 = Text(free_health_subscribe_box, text = ' ', grid = [0,6], height = 1) # Creates space between two rows to improve appearance# Create colour scheme 
+# Create colour scheme #
+# Main box
+free_health_window.bg = light_purple
+free_health_box.bg = 'white'
+free_health_back_button.bg = light_purple
+# Left box
+free_health_sleep_button.bg = light_blue
+free_health_eating_button.bg = light_blue
+free_health_mental_health_button.bg = light_blue
+# Subscribe box
+free_health_subscribe_box.bg = pink
+free_health_subscribe_lable.text_color = light_blue
+free_health_subscribe_message2.text_color = light_blue
+free_health_subscribe_button.bg = light_blue
+# Hide window #
+free_health_window.hide()
+
+
+
+# Display entire app
+app.display()
