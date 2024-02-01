@@ -1,0 +1,98 @@
+def go_to_dashboard():
+    # Show dashboard window and hide the linked windows
+    dashboard_window.show()
+    premium_fitness_window.hide()
+    premium_health_window.hide()
+    subscribe_window.hide()
+    free_fitness_window.hide()
+    free_health_window.hide()
+    sign_up_window.hide()
+
+
+def bulk_poster():
+    # Display the bulk poster
+    free_fitness_poster.image = 'Bulk_poster.jpg'
+
+
+
+def cut_poster():
+    # Display the cut poster
+    free_fitness_poster.image = 'Cut_poster.jpg'
+
+
+
+def weight_loss_poster():
+    # Display the weight loss poster
+    free_fitness_poster.image = 'Weight_Loss_poster.jpg'
+
+
+def go_to_subscribe():
+    # Clear textboxes to improve data privacy and comply with GDPR
+    subscribe_weight_input.clear()
+    subscribe_DOB_input.clear()
+    subscribe_height_input.clear()
+    subscribe_card_input.clear()
+    # Show subscribe window and hide the linked windows
+    subscribe_window.show()
+    dashboard_window.hide()
+    free_fitness_window.hide()
+    free_health_window.hide()
+
+###########################
+# # Free fitness advice # #
+###########################
+# Create window + box #
+free_fitness_window = Window(app, title = 'Free fitness content', height = 700, width = 1125)
+free_fitness_box = Box(free_fitness_window, align = 'top', width = 1075, height = 'fill', layout = 'grid')
+# Fill window #
+# Main box 
+free_fitness_logo = Picture(free_fitness_box, image = 'Toka_Logo.png', grid = [5,0], align = 'right', height = 50, width = 90) # Add free fitness content window
+free_fitness_icon = Picture(free_fitness_box, image = 'Fitness_icon.png', grid = [4,0], height = 50, width = 50, align = 'left') # Add free fitness content window
+free_fitness_title = Text(free_fitness_box, text = 'Fitness advice', grid = [3,0], align = 'right', size = 35) # Adds lable to free fitness content window
+free_fitness_back_button = PushButton(free_fitness_box, text = 'Back', grid = [5,4], width = 15, height = 2, align = 'right', command = go_to_dashboard) 
+free_fitness_poster = Picture(free_fitness_box, image = 'Bulk_poster.jpg', grid = [3,2], height = 500, width = 400, align = 'left') # Add free fitness content window
+# Left box
+free_fitness_left_box = Box(free_fitness_box, grid = [1,2], width = 300, height = 500, layout = 'grid', border = True)
+free_fitness_bulk_button = PushButton(free_fitness_left_box, text = 'Bulk', grid = [1,1], align = 'right', width = 25, height = 6, command = bulk_poster)
+free_fitness_cut_button = PushButton(free_fitness_left_box, text = 'Cut', grid = [1,3], align = 'right', width = 25, height = 6, command = cut_poster)
+free_fitness_weight_loss_button = PushButton(free_fitness_left_box, text = 'Weight Loss', grid = [1,5], align = 'right', width = 25, height = 6, command = weight_loss_poster)
+# Subscribe box
+free_fitness_subscribe_box = Box(free_fitness_box, grid = [5,2], width = 300, height = 500, layout = 'grid', border = True)
+free_fitness_subscribe_lable = Text(free_fitness_subscribe_box, text = 'Subscribe!', grid = [1,1], size = 25)
+free_fitness_subscribe_message = Text(free_fitness_subscribe_box, text = 'Click below to subscribe\nto a premium account\nand access even more\nhealth and fitness\ncontent!!!', grid = [1,3])
+free_fitness_subscribe_message2 = Text(free_fitness_subscribe_box, text = 'For just £9.99 a\nmonth!!!', size = 15, grid = [1,5])
+free_fitness_subscribe_button = PushButton(free_fitness_subscribe_box, text = 'Get a premium \naccount HERE!', grid = [1,7], width = 15, height = 3, command = go_to_subscribe)
+# Improve layout of window #
+# Main box
+free_fitness_blank_column1 = Text(free_fitness_box, text = ' ', grid = [0,0], width = 4) # Creates space between two columns to improve appearance
+free_fitness_blank_column2 = Text(free_fitness_box, text = ' ', grid = [2,0], width = 4) # Creates space between two columns to improve appearance
+free_fitness_blank_column3 = Text(free_fitness_box, text = ' ', grid = [4,1], width = 4) # Creates space between two columns to improve appearance
+free_fitness_blank_row1 = Text(free_fitness_box, text = ' ', grid = [0,1], height = 1) # Creates space between two rows to improve appearance
+free_fitness_blank_row2 = Text(free_fitness_box, text = ' ', grid = [0,3], height = 1) # Creates space between two rows to improve appearance
+# Left box
+free_fitness_left_box_blank_row1 = Text(free_fitness_left_box, text = ' ', grid = [0,0], height = 2, width = 2) # Creates space between two rows to improve appearance
+free_fitness_left_box_blank_row2 = Text(free_fitness_left_box, text = ' ', grid = [2,6], height = 2, width = 2) # Creates space between two rows to improve appearance
+free_fitness_left_box_blank_row3 = Text(free_fitness_left_box, text = ' ', grid = [0,2], height = 1) # Creates space between two rows to improve appearance
+free_fitness_left_box_blank_row3 = Text(free_fitness_left_box, text = ' ', grid = [0,4], height = 1) # Creates space between two rows to improve appearance
+# Subscribe box
+free_fitness_subscribe_blank_column1 = Text(free_fitness_subscribe_box, text = ' ', grid = [0,0], width = 2, height = 2) # Creates space between two columns to improve appearance
+free_fitness_subscribe_blank_column2 = Text(free_fitness_subscribe_box, text = ' ', grid = [2,8], width = 2, height = 2) # Creates space between two columns to improve appearance
+free_fitness_subscribe_blank_row1 = Text(free_fitness_subscribe_box, text = ' ', grid = [0,2], height = 1) # Creates space between two rows to improve appearance
+free_fitness_subscribe_blank_row2 = Text(free_fitness_subscribe_box, text = ' ', grid = [0,4], height = 1) # Creates space between two rows to improve appearance
+free_fitness_subscribe_blank_row3 = Text(free_fitness_subscribe_box, text = ' ', grid = [0,6], height = 1) # Creates space between two rows to improve appearance# Create colour scheme 
+# Create colour scheme #
+# Main box
+free_fitness_window.bg = light_purple
+free_fitness_box.bg = 'white'
+free_fitness_back_button.bg = light_purple
+# Left box
+free_fitness_bulk_button.bg = light_blue
+free_fitness_cut_button.bg = light_blue
+free_fitness_weight_loss_button.bg = light_blue
+# Subscribe box
+free_fitness_subscribe_box.bg = pink
+free_fitness_subscribe_lable.text_color = light_blue
+free_fitness_subscribe_message2.text_color = light_blue
+free_fitness_subscribe_button.bg = light_blue
+# Hide window #
+free_fitness_window.hide()
