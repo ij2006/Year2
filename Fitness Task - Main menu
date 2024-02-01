@@ -1,0 +1,45 @@
+# Create app
+app = App()
+app.hide()
+
+
+
+########################
+# # Main menu Window # #
+######################## 
+# Create window + box
+main_menu_window = Window(app, title = 'Main menu',  height = 400, width = 900)
+main_menu_box = Box(main_menu_window, width = 840, height = 'fill', layout = 'grid') # Creates box inside app
+# Fill box
+main_menu_lable = Text(main_menu_box, text = 'Welcome to Toka Fitness!', size = 20, grid = [3,0]) # Adds welcome message to main menu
+main_menu_logo = Picture(main_menu_box, image = 'Toka_Logo.png', grid = [6,0], height = 50, width = 90, align = 'right') # Adds logo to main menu window
+main_menu_big_logo = Picture(main_menu_box, image = 'Toka_Logo.png', grid = [3,2], height = 100, width = 180, align = 'top') # Adds logo to main menu window
+# Add buttons to window
+main_menu_login_button = PushButton(main_menu_box, text = 'Login', height = 2, width = 15, grid = [1,1], align = 'bottom', command = go_to_login_window) # Login button which when pressed runs login_window_process def.
+main_menu_sign_up_button = PushButton(main_menu_box, text = 'Sign up', height = 2, width = 15, grid = [1,2], align = 'bottom', command = go_to_sign_up_window) # Adds sign up button to main menu
+main_menu_settings_button = PushButton(main_menu_box, text = 'Settings', height = 2, width = 15, grid = [5,2], align = 'top', command = go_to_settings_window) # Adds settings button to main menu
+main_menu_exit_button = PushButton(main_menu_box, text = 'Exit', height = 1, width = 8, grid = [6,6], command = exit_app) # Exit button destroys app when pressed
+# Add Cookies and T's and C's to window
+main_menu_cookies_lable = Text(main_menu_box, text = 'Consent to cookies', grid = [1,5], size = 10, align = 'right') # Adds cookies lable to main menu
+main_menu_cookies_tick = CheckBox(main_menu_box, grid = [2,5], align = 'left') # Adds check boc to allow user to consent to cookies on main menu
+main_menu_TC_lable = Text(main_menu_box, text = 'Agree to Terms and Conditions', grid = [1,6], align = 'right', size = 10) # Adds cookies lable to main menu
+main_menu_TC_tick = CheckBox(main_menu_box, grid = [2,6], align = 'left') # Adds check boc to allow user to consent to cookies on main menu
+main_menu_view_policies = Text(main_menu_box, text = 'View policies', size = 8, width = 15, grid = [1,7], align = 'top') # Button to show terms and conditions in separate window displayed using function
+main_menu_view_policies.when_clicked = view_policies
+# Improve layout of window
+main_menu_blank_row1 = Text(main_menu_box, text = ' ', grid = [0,1]) # Creates space between two rows to improve appearance
+main_menu_blank_row2 = Text(main_menu_box, text = ' ', grid = [0,3]) # Creates space between two rows to improve appearance
+main_menu_blank_row3 = Text(main_menu_box, text = ' ', grid = [0,4]) # Creates space between two rows to improve appearance
+main_menu_blank_column1 = Text(main_menu_box, text = ' ', grid = [0,0], width = 5) # Creates space between two rows to improve appearance
+main_menu_blank_column2 = Text(main_menu_box, text = ' ', grid = [2,0]) # Creates space between two rows to improve appearance
+main_menu_blank_column3 = Text(main_menu_box, text = ' ', grid = [4,0]) # Creates space between two rows to improve appearance
+main_menu_blank_column3 = Text(main_menu_box, text = ' ', grid = [7,0], width = 5) # Creates space between two rows to improve appearance
+# Create colour scheme
+main_menu_window.bg = light_purple
+main_menu_exit_button.bg = light_purple
+main_menu_box.bg = 'white'
+main_menu_login_button.bg = light_purple
+main_menu_sign_up_button.bg = light_purple
+main_menu_settings_button.bg = light_purple
+main_menu_view_policies.text_color = pink
+main_menu_exit_button.bg = light_purple
