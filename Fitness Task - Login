@@ -1,1 +1,83 @@
+def login_button_procedure():
+    # Validate username + password
+    if login_username_input.value == "": # If the user has not entered any text
+        info("Error", "You must enter a username") # Error message to inform user to enter username
+    elif login_password_input.value == "": # If the user has not entered any text
+        info("Error", "You must enter a password") # Error message to inform user to enter password
+    elif "'" in login_password_input.value  or "'" in login_username_input.value: # Mitigate against sql injection
+        info("Error", "Invalid entry") # Error message
+    else:
+        # Check input to database
+        sql_select = ["SELECT * FROM User_Table WHERE username=?", (login_username_input.value,)]
+        rows = query_database(database_file, sql_select) # Runs sql query procedure
+        if len(rows) == 0: ### This checks that the user was found ###
+            info("Error","User does not exist") # Error message if the entered details are not found in the databse
+        else:
+            # Now hash password
+            hash_pw = hashlib.sha512(login_password_input.value.encode('utf8')).hexdigest()
+            print('Login', hash_pw)
+            # check password
+            if hash_pw == rows[0][2]:
+                #info("Log in","Success")
+                global glb_user_logged_in
+                glb_user_logged_in = rows[0][0]
+                global glb_user_type
+                if rows [0][6] == 'True': 
+                # If user has a premium account then they can access more windows further in the program
+                    glb_user_type = 1
+                else:
+                    glb_user_type = 0
+                dashboard_window.show()
+                login_window.hide()
+            else:
+                info("Error","Password is incorrect")
 
+def go_to_main_menu():
+    # Show main menu window and hide the linked windows
+    main_menu_window.show()
+    sign_up_window.hide()
+    login_window.hide()
+    settings_window.hide()
+
+def go_to_change_password():
+    # Show change password window and hide the linked windows
+    # Clear login inputs for data protection 
+    change_password_username_input.clear()
+    change_password_password_input.clear()
+    change_password_reenter_password_input.clear()
+    # Go to the change password form
+    login_window.hide()
+    sign_up_window.hide()
+    change_password_window.show()
+
+####################
+# # Login window # #
+####################
+# Create window + box
+login_window = Window(app, title = 'Login', height = 250, width = 600) # Creeate login window
+login_box = Box(login_window, width = 550, height = 'fill', layout = 'grid') # Create box in login window
+# Fill box
+login_lable = Text(login_box, text = 'Login to an existing account', grid = [2,0]) # Adds lable to login window
+login_logo = Picture(login_box, image = 'Toka_Logo.png', grid = [5,0], height = 50, width = 90) # Add logo to login window
+login_username_lable = Text(login_box, text = 'Enter username:', width = 15, grid = [1,1]) 
+login_username_input = TextBox(login_box, width = 20, grid = [2,1])
+login_password_lable = Text(login_box, text = 'Enter password:', width = 15, grid = [1,2]) # Where user inputs password + program sanitizes password on input
+login_password_input = TextBox(login_box, width = 20, grid = [2,2], hide_text = True)
+login_login_button = PushButton(login_box, text = 'Login', grid = [2,4], width = 12, height = 1, align = 'bottom', command = login_button_procedure)
+login_change_password_text = Text(login_box, text = 'Change password', size = 8, grid = [2,5], align = 'top')
+login_change_password_text.when_clicked = go_to_change_password
+login_back_button = PushButton(login_box, text = 'Back', grid = [5,5], command = go_to_main_menu)
+# Improve layout of window
+login_blank_column1 = Text(login_box, text = ' ', width = 3, grid = [0,0]) # Creates space between two columns to improve appearance
+login_blank_column2 = Text(login_box, text = ' ', width = 5, grid = [3,0]) # Creates space between two columns to improve appearance
+login_blank_row1 = Text(login_box, text = ' ', grid = [2,3]) # Creates space between two columns to improve appearance
+# Create colour scheme 
+login_window.bg = light_purple
+login_box.bg = 'white'
+login_change_password_text.text_color = pink
+login_username_input.bg = light_purple
+login_password_input.bg = light_purple
+login_login_button.bg = light_purple
+login_back_button.bg = light_purple
+# Hide window
+login_window.hide()
