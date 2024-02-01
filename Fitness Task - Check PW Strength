@@ -1,0 +1,22 @@
+def check_password_strength(pw1, pw2):
+    # This function checks password strength is adequate for security
+    # It returns True if the password has an adequate strength otherwise it returns False
+    special_char = ['!', '£', '$']
+    # Length checks
+    if len(pw1) < 8:
+        info('Error', 'Password must be at least 8 characters long')
+        return False
+    elif len(pw1) > 20:
+        info('Error', 'Password must be maximum 20 characters long')
+        return False
+    # Presence check
+    elif not any (c in special_char for c in pw1):
+        info('Error', 'Password must contain a special character')
+        return False
+    elif pw1 != pw2:
+        # Check passwords match
+        info('Error', 'Passwords do not match')
+        return False
+    else:
+        print('Password ok')
+        return True
