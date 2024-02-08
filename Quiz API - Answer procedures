@@ -1,3 +1,15 @@
+
+def answer1():
+    global points
+    #global num
+    if option1.text == corr_answer:
+        info('Correct', 'Well done')
+        points = points + 10
+        points_display2.value = points
+    else:
+        info('Incorrect', 'Wrong')
+    get_nextQ()
+
 def answer2():
     global points
     #global num
