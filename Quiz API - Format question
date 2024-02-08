@@ -1,0 +1,6 @@
+def formatQ(QQ): 
+    # Remove non alpha characters from question.
+    test_str = ''.join(letter for letter in QQ if letter.isalpha() or letter == " " or letter == "?")
+    print(test_str)
+
+    return test_str
