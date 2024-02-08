@@ -1,0 +1,9 @@
+from guizero import App, Window, Text, TextBox, Box, PushButton, Combo, info, Picture, CheckBox
+import requests
+import random
+
+counter = 0
+points = 0
+all_data = 0
+corr_answer = 0
+length = 0
