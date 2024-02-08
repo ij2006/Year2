@@ -1,0 +1,33 @@
+def answer2():
+    global points
+    #global num
+    if option2.text == corr_answer:
+        info('Correct', 'Well done')
+        points = points + 10
+        points_display2.value = points
+    else:
+        info('Incorrect', 'Wrong')
+    get_nextQ()
+
+def answer3():
+    global points
+    #global num
+    if option3.text == corr_answer:
+        info('Correct', 'Well done')
+        points = points + 10
+        points_display2.value = points
+    else:
+        info('Incorrect', 'Wrong')
+    get_nextQ()
+
+    
+def answer4():
+    global points
+    #global num
+    if option4.text == corr_answer:
+        info('Correct', 'Well done')
+        points = points + 10
+        points_display2.value = points
+    else:
+        info('Incorrect', 'Wrong')
+    get_nextQ()
