@@ -24,3 +24,14 @@ cursor.executescript(sql) # Create the tables
 conn.commit() # Commit to save everything
 
 conn.close() # Close the connection to the database
+
+
+
+# Colour pallette 
+# Save chosen colours as variables to make colour selection simpler to use
+purple = 'dark slate blue'
+green = 'sea green'
+blue = 'SlateBlue2'
+light_purple = 'medium purple1'
+pink = 'plum'
+light_blue = 'pale turquoise'
