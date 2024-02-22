@@ -1,0 +1,29 @@
+def setTest():
+    dateToday = todaysDate()
+    dueDate = setDate.value
+    goodDueDate = check_date_format(dueDate)
+    if goodDueDate == True and dueDate > dateToday:
+        info('Date', 'Good date')
+        if setStudent.value != 'Select Student' and setSubject.value != 'SelectSubject':
+            info('Success', 'Success - Test set')
+            sql_select = "SELECT username FROM UserTable WHERE userID = '" + str(glb_user_logged_in) +"'"
+            teacher = query_database(database_file, sql_select) # Runs sql query procedure
+            print(teacher)
+            teacherUN = teacher[0][0]
+            print(teacherUN)
+            studentID = setStudent.value
+            studentID = studentID.split(" ")
+            studentIDint = int(studentID[0])
+            print(studentID)
+            #sql_select = "SELECT userID FROM UserTable WHERE username = '" + str(studentID) + "'"
+            #student = query_database(database_file, sql_select) # Runs sql query procedure
+            #print(student)
+            sql2 = ("INSERT INTO TestTable(testTeacher, testSubject, testDueDate, testDateSet, testComplete, userID) values ('"+ str(teacherUN) +"','"+ str(setSubject.value) +"','"+ str(dueDate) +"','"+ str(dateToday) +"','" '0' +"','" + str(studentIDint)+"')")
+            execute_sql(database_file, sql2)
+            info('Sucess', 'Test set')
+        elif setStudent.value == 'Select Student':
+            info('Error', 'Select a student')
+        elif setSubject.value == 'Select Student':
+            info('Error', 'Select a subject')
+    else:
+        info('Date', 'Bad date - must be YYYY-MM-DD and in the future')
