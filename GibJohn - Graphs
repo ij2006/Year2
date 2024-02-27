@@ -1,0 +1,47 @@
+
+def graphs():
+    graphWindow.show()
+
+def graphShow():
+    # Creating a pie chart using groupby
+    global glb_user_logged_in
+    # Join tables together using SQL and dreate dataframe
+    conn = sqlite3.connect(database_file)
+    cursor = conn.cursor()
+    cursor.execute("SELECT testSubject, testScore from testTable where testComplete = '1' AND userID =" + str(glb_user_logged_in)+"")
+    df = pd.DataFrame(cursor.fetchall(), columns = ['testSubject', 'testScore'])
+    print(df)
+
+    # Group by username
+    dftotal = df.groupby(['testSubject'])['testScore'].mean().reset_index()
+    print(dftotal)
+
+    # Make the pie chart
+    mycolours = ['#ffb3e6', '#c2c2f0', '#ff9999','#66b3ff','#99ff99','#ffcc99'] # Colour codes
+    plt.pie(dftotal['testScore'], labels = dftotal['testScore'], colors = mycolours)
+    plt.legend(dftotal['testSubject'], title = 'Subject', bbox_to_anchor=(0.85,1.025), loc = 'upper left') # Positions the key away from the pie chart
+    plt.title('Test results')
+    plt.show()
+
+
+#############
+# Take quiz # 
+#############
+window = Window(app, title = 'Test', height = 350, width = 850)
+blank = Text(window, text = '')
+lable_question = Text(window, text = 'Question:')
+question = Text(window,  text = '')
+box1 = Box(window, width = 'fill', layout = 'grid')
+chooseQuiz = Combo(box1, options = ['Select Quiz'], grid = [0,0])
+takeQuizButton = PushButton(box1, text = 'Take Quiz', grid = [0,1], command = quiz)
+box = Box(window, width = 'fill', layout = 'grid')
+blank = Text(box, text = '', grid = [0,0], width = 5)
+option1 = PushButton(box, grid = [1,3], text = 'Option 1', width = 20, command = answer1)
+option2 = PushButton(box, grid = [2,3], text = 'Option 2', width = 20, command = answer2)
+option3 = PushButton(box, grid = [3,3], text = 'Option 3', width = 20, command = answer3)
+option4 = PushButton(box, grid = [4,3], text = 'Option 4', width = 20, command = answer4)
+blank = Text(box, text = '', grid = [0,4], height = 2)
+get = PushButton(box, grid = [4,5], text = 'Next', command = get_nextQ)
+points_display = Text(box, grid = [1,5], text = 'Points = ', align = 'right')
+points_display2 = Text(box, grid = [2,5], align = 'left', text = points)
+window.hide()
