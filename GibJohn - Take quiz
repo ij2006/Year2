@@ -1,0 +1,20 @@
+def updateQuizResult():
+    global points
+    global quiz_rows
+    testID = chooseQuiz.value
+    testID2 = testID.split(',')
+    testID3 = testID2[0].replace("'", "")
+    testID4 = testID3.lstrip()
+    testID5 = testID4.replace("(", "")
+    mysql = ("UPDATE TestTable SET testComplete = '1', testScore = '"+str(points)+"'WHERE testID = '"+str(testID5)+"'") # Updates db 
+    execute_sql(database_file, mysql) # Executes SQL
+
+
+#############
+# Take quiz # 
+#############
+graphWindow = Window(app, title = 'Graph', height = 150, width = 250)
+graphButton = PushButton(graphWindow, command = graphShow)
+graphWindow.hide()
+
+app.display()
