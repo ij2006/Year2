@@ -1,0 +1,16 @@
+def todaysDate():
+    today_formatted = datetime.date.today() # Get todays date
+    today_string = datetime.datetime.strftime(today_formatted, "%Y-%m-%d") # Format as YYYY-MM-DD 
+    return today_string
+
+def check_date_format(date):
+    from datetime import datetime # Import locally as needed strptime function 
+    date_format = '%Y-%m-%d'
+      # using try-except blocks for handling the exceptions
+    try:
+        # formatting the date using strptime() function
+        dateObject = datetime.strptime(date, date_format)
+        return True
+    # If the date validation goes wrong
+    except ValueError:
+        return False
