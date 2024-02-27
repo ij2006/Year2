@@ -11,6 +11,26 @@ def openDashboard():
     login_window.hide()
     info('Tests',message)
 
+def openAssesment():
+    global quiz_rows
+    for row in quiz_rows:
+        if row[7] == glb_user_logged_in:
+            chooseQuiz.append(row)
+    dashboard_window.hide()
+    window.show()
+
+def quiz():
+    if chooseQuiz.value == 'Select Quiz':
+        info('Error', 'No quiz selected')
+    else:
+        subject = chooseQuiz.value
+        subject2 = subject.split(',')
+        subject3 = subject2[2].replace("'", "")
+        subject4 = subject3.lstrip()
+        print(subject2)
+        print(subject2[2])
+        getQuiz(subject4)
+
 ########################
 # # Dashboard window # #
 ########################
