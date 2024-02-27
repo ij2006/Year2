@@ -9,6 +9,17 @@ def updateQuizResult():
     mysql = ("UPDATE TestTable SET testComplete = '1', testScore = '"+str(points)+"'WHERE testID = '"+str(testID5)+"'") # Updates db 
     execute_sql(database_file, mysql) # Executes SQL
 
+def quiz():
+    if chooseQuiz.value == 'Select Quiz':
+        info('Error', 'No quiz selected')
+    else:
+        subject = chooseQuiz.value
+        subject2 = subject.split(',')
+        subject3 = subject2[2].replace("'", "")
+        subject4 = subject3.lstrip()
+        print(subject2)
+        print(subject2[2])
+        getQuiz(subject4)
 
 #############
 # Take quiz # 
