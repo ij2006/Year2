@@ -24,8 +24,21 @@ def quiz():
 #############
 # Take quiz # 
 #############
-graphWindow = Window(app, title = 'Graph', height = 150, width = 250)
-graphButton = PushButton(graphWindow, command = graphShow)
-graphWindow.hide()
-
-app.display()
+window = Window(app, title = 'Test', height = 350, width = 850)
+blank = Text(window, text = '')
+lable_question = Text(window, text = 'Question:')
+question = Text(window,  text = '')
+box1 = Box(window, width = 'fill', layout = 'grid')
+chooseQuiz = Combo(box1, options = ['Select Quiz'], grid = [0,0])
+takeQuizButton = PushButton(box1, text = 'Take Quiz', grid = [0,1], command = quiz)
+box = Box(window, width = 'fill', layout = 'grid')
+blank = Text(box, text = '', grid = [0,0], width = 5)
+option1 = PushButton(box, grid = [1,3], text = 'Option 1', width = 20, command = answer1)
+option2 = PushButton(box, grid = [2,3], text = 'Option 2', width = 20, command = answer2)
+option3 = PushButton(box, grid = [3,3], text = 'Option 3', width = 20, command = answer3)
+option4 = PushButton(box, grid = [4,3], text = 'Option 4', width = 20, command = answer4)
+blank = Text(box, text = '', grid = [0,4], height = 2)
+get = PushButton(box, grid = [4,5], text = 'Next', command = get_nextQ)
+points_display = Text(box, grid = [1,5], text = 'Points = ', align = 'right')
+points_display2 = Text(box, grid = [2,5], align = 'left', text = points)
+window.hide()
