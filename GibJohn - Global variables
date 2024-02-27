@@ -1,0 +1,38 @@
+#                  #
+# Global variables #
+#                  #
+
+database_file = 'GibJohn.db' # Global variable creates database name
+
+if os.path.exists(database_file): # Recreates database 
+    os.remove(database_file)
+
+glb_user_logged_in = 0
+glb_user_type = 0
+counter = 0
+points = 0
+all_data = 0
+corr_answer = 0
+length = 0
+quiz_rows = 0
+
+# Connect to the database #
+
+conn = sqlite3.connect(database_file)
+
+cursor = conn.cursor() # Get a cursor pointing to the database
+
+cursor.executescript(sql) # Create the tables
+
+conn.commit() # Commit to save everything
+
+conn.close() # Close the connection to the database
+
+# Colour pallette 
+# Save chosen colours as variables to make colour selection simpler to use
+purple = 'dark slate blue'
+green = 'sea green'
+blue = 'SlateBlue2'
+light_purple = 'medium purple1'
+pink = 'plum'
+light_blue = 'pale turquoise'
