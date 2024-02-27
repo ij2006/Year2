@@ -1,0 +1,26 @@
+def openSetTest():
+    sql_select = "SELECT * FROM UserTable WHERE userStatus ='0'" # Sql select all logged in users detail tht are teachers
+    rows_returned = query_database(database_file, sql_select)  # Query the database
+    for row in rows_returned:
+        studentsUID = row[0]
+        studentsFN = row[3]
+        studentsSN = row[4]
+        student = str(studentsUID) + " " + studentsFN + " " + studentsSN
+        setStudent.append(student)
+    login_window.hide()
+    dashboard_window.hide()
+    setWindow.show()
+
+############
+# Set quiz # 
+############
+# Create window + box
+setWindow = Window(app, title = 'Options', height = 450, width = 1150)
+setBox = Box(setWindow, align = 'top', width = 1100, height = 'fill', layout = 'grid') # Create box in aign up window
+# Fill box
+setStudent = Combo(setBox, options = ['Select Student'], grid = [0,0])
+setSubject = Combo(setBox, options = ['Select Subject', 'Sports', 'Animals'], grid = [0,1])
+setDate = TextBox(setBox, text = 'Enter due date', grid = [0,2], width = 'fill')
+setTestButton = PushButton(setBox, text = 'Set test', grid = [0,3], command = setTest)
+# Hide window
+setWindow.hide()
