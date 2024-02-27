@@ -1,0 +1,47 @@
+def openDashboard():
+    global glb_user_type
+    global glb_user_logged_in
+    global quiz_rows
+    if glb_user_type == 0:
+        sql_select = "SELECT * FROM TestTable WHERE testComplete = '0' AND userID = '" + str(glb_user_logged_in) + "'"
+        quiz_rows = query_database(database_file, sql_select)
+        num_rows = str(len(quiz_rows))
+        message = 'You have '+num_rows+' incomplete tests'
+    dashboard_window.show()
+    login_window.hide()
+    info('Tests',message)
+
+########################
+# # Dashboard window # #
+########################
+# Create window + box
+dashboard_window =  Window(app, title = 'Options', height = 450, width = 1150) # Creeate landing page window
+dashboard_box = Box(dashboard_window, align = 'top', width = 1100, height = 'fill', layout = 'grid') # Create box in aign up window
+# Fill box
+dashboard_lable = Text(dashboard_box, text = 'Select the function you wish to use', grid = [1,0], size = 20) # Adds lable to dashboard
+dashboard_logo = Picture(dashboard_box, image = 'pig.jfif', grid = [5,0], height = 50, width = 90) # Add logo to sign up window
+#dashboard_premium_title = Text(dashboard_box, text = 'Premium', size = 18, grid = [0,2], align = 'right')
+#dashboard_taster_title = Text(dashboard_box, text = 'Taster', size = 18, grid = [2,2], align = 'right')
+dashboard_premium_fitness_icon = Picture(dashboard_box, image = 'pig.jfif', grid = [0,3], width = 90, height = 90, align = 'right') 
+dashboard_premium_fitness_button = PushButton(dashboard_box, text = 'Assesment', grid = [1,3], align = 'left', command = openAssesment)
+dashboard_premium_health_icon = Picture(dashboard_box, image = 'pig.jfif', grid = [0,4], width = 90, height = 90, align = 'right') 
+dashboard_premium_health_button = PushButton(dashboard_box, text = 'Learn', grid = [1,4], align = 'left')#, command = go_to_premium_health)
+dashboard_free_fitness_icon = Picture(dashboard_box, image = 'pig.jfif', grid = [2,3], width = 90, height = 90, align = 'left')
+dashboard_free_fitness_button = PushButton(dashboard_box, text = 'Monitor', grid = [3,3], command = graphs)
+dashboard_free_health_icon = Picture(dashboard_box, image = 'pig.jfif', grid = [2,4], width = 90, height = 90, align = 'left')
+dashboard_free_health_button = PushButton(dashboard_box, text = 'Set test', grid = [3,4], command = openSetTest)
+dashboard_back_button = PushButton(dashboard_box, text = 'Back', grid = [5,5], width = 15, height = 2)#, command = go_to_login_window) # Adds back button into dashboard box that runs the back to main menu procedure
+# Imporve layout of window
+dashboard_blank_column1 = Text(dashboard_box, text = ' ', grid = [0,0], width = 20) # Creates space between two columns to improve appearance
+dashboard_blank_column2 = Text(dashboard_box, text = ' ', grid = [4,2], width = 5) # Creates space between two columns to improve appearance
+# Create colour scheme
+dashboard_lable.text_color = pink
+dashboard_window.bg = light_purple
+dashboard_box.bg = 'white'
+dashboard_back_button.bg = light_purple
+dashboard_premium_fitness_button.bg = light_blue
+dashboard_premium_health_button.bg = light_blue
+dashboard_free_fitness_button.bg = light_blue
+dashboard_free_health_button.bg = light_blue
+# Hide window
+dashboard_window.hide()
