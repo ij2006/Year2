@@ -2,7 +2,7 @@
 # # Import libraries # #
 ######################## 
 
-from guizero import App, Window, Text, TextBox, Box, PushButton, Combo, info, Picture, CheckBox # Imports that allow guizero functionality
+from guizero import App, Window, Text, TextBox, Box, PushButton, Combo, info, Picture, CheckBox, ListBox # Imports that allow guizero functionality
 import sqlite3 # Import sql in order to create my database
 import os # Import os libraries in order to reset the database
 import os.path
