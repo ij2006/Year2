@@ -1,0 +1,18 @@
+def completeOrder():
+    orderDetails = order.items
+    orderDetails = str(orderDetails)
+    orderDetails = orderDetails.replace("'", "")
+    orderDetails = orderDetails.replace("[", "")
+    orderDetails = orderDetails.replace("]", "")
+    global cost
+    global glb_user_logged_in
+    time = selectTime.value
+    if time == 'Select time slot':
+        info('Error', 'Please select a time slot')
+    mysql = ("INSERT INTO OrderTable (orderCollected, orderProducts, orderTime, orderCost, userID) VALUES ('0','" + orderDetails + "','" + str(time) + "','" + str(cost) + "','" + str(glb_user_logged_in) + "')") 
+    execute_sql(database_file, mysql)
+    info('Success', 'Order complete')
+    cost = 0
+    totalMessage = 'Total £'+ str(cost)
+    orderTotal.value = totalMessage
+    order.clear() 
