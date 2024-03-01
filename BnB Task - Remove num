@@ -1,0 +1,6 @@
+
+def removedigits(string_mix):
+    result = ''.join(i for i in string_mix if not i.isdigit())
+    result = result.replace('.','')
+    result = result.strip()
+    return result
