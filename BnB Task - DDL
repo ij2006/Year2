@@ -1,0 +1,64 @@
+################################################
+# # Create database using DDL sql statements # #
+################################################
+
+# Create database to store user details in four tables
+sql = """
+CREATE TABLE "UserTable"(
+    "userID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "username" TEXT,
+    "userPassword" TEXT,
+    "userFN" TEXT,
+    "userSN" TEXT,
+    "userEmail" TEXT,
+    "userType" INTEGER
+);
+
+CREATE TABLE "OrderTable"(
+    "orderID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "orderProducts" TEXT,
+    "orderTime" TEXT,
+    "orderCollected" INTEGER,
+    "orderCost" REAL,
+    "userID" INTEGER,
+    CONSTRAINT "userID" FOREIGN KEY ("userID") REFERENCES "UserTable"("userID")
+);
+
+CREATE TABLE "ProductTable"(
+    "productID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "productName" TEXT,
+    "productCost" TEXT,
+    "productCategory" TEXT,
+    "productDescription" TEXT
+);
+
+CREATE TABLE "ReviewTable"(
+    "reviewID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "reviewRating" INTEGER,
+    "reviewMessage" TEXT,
+    "userID" INTEGER,
+    "productID" INTEGER,
+    CONSTRAINT "userID" FOREIGN KEY ("productID") REFERENCES "ProductTable"("productID")
+);
+
+insert into UserTable (username, userPassword, userFN, userSN, userEmail, userType) values ('customer1', 'a1ec99da79c2e8a27adf13a7069544d6e665d8238a97816d4ceda3b3a46636621db91ab101788fae08c0a69abc300631ca9c381bf3a7fe1701980543653ebdc9', 'cust', 'one', 'cust@email.com', 0);
+insert into UserTable (username, userPassword, userFN, userSN, userEmail, userType) values ('customer2', 'a1ec99da79c2e8a27adf13a7069544d6e665d8238a97816d4ceda3b3a46636621db91ab101788fae08c0a69abc300631ca9c381bf3a7fe1701980543653ebdc9', 'cust2', 'two', 'cust2@email.com', 0);
+insert into UserTable (username, userPassword, userFN, userSN, userEmail, userType) values ('staff1', 'a1ec99da79c2e8a27adf13a7069544d6e665d8238a97816d4ceda3b3a46636621db91ab101788fae08c0a69abc300631ca9c381bf3a7fe1701980543653ebdc9', 'staff', 'staff', 'staff@email.com', 1);
+insert into OrderTable (orderProducts, orderTime, orderCollected, orderCost, userID) values ('Reg Latte X 2, Large Mocha X 1, Bakewell X 3', '10.30', '0', '20.44', '1');
+insert into OrderTable (orderProducts, orderTime, orderCollected, orderCost, userID) values ('Small Hot Chocolate X 1, Espresso X 1, Brownie X 2', '10.30', '0', '11.96', '1');
+insert into ProductTable (productName, productCost, productCategory, productDescription) values ('Latte', '3.99', 'Hot drink', 'Espresso and Hot milk with little foam');
+insert into ProductTable (productName, productCost, productCategory, productDescription) values ('Mocha', '3.49', 'Hot drink', 'Hot chocolate powder, Espresso and Hot Milk with little foam');
+insert into ProductTable (productName, productCost, productCategory, productDescription) values ('Cappuccino', '3.99', 'Hot drink', 'Espresso and Hot Milk with foam');
+insert into ProductTable (productName, productCost, productCategory, productDescription) values ('Iced caramel latte', '3.49', 'Cold drink', 'Espresso, Caramel syrup and cold milk with ice');
+insert into ProductTable (productName, productCost, productCategory, productDescription) values ('Bakewell', '2.99', 'Cake', 'Cherry and almost tart');
+insert into ProductTable (productName, productCost, productCategory, productDescription) values ('Black Americano', '2.49', 'Hot drink', 'Espresso and Hot water');
+insert into ProductTable (productName, productCost, productCategory, productDescription) values ('White Americano', '2.99', 'Hot drink', 'Espresso and Hot water topped off with hot milk');
+insert into ProductTable (productName, productCost, productCategory, productDescription) values ('Espresso', '1.99', 'Hot drink', 'Single espresso shot');
+insert into ProductTable (productName, productCost, productCategory, productDescription) values ('Double espresso', '2.99', 'Hot drink', 'Two espresso shots');
+insert into ProductTable (productName, productCost, productCategory, productDescription) values ('Flat white', '3.99', 'Hot drink', 'Espresso and Hot Milk with slight foam');
+insert into ProductTable (productName, productCost, productCategory, productDescription) values ('Hot chocolate', '3.99', 'Hot drink', 'Chocolate powder and Hot milk');
+insert into ProductTable (productName, productCost, productCategory, productDescription) values ('Brownie', '2.99', 'Cake', 'Chocolaty yummy food');
+insert into ProductTable (productName, productCost, productCategory, productDescription) values ('Rocky road', '3.99', 'Cake', 'Chocolaty yummy food with marshmallows etc');
+insert into ReviewTable (reviewRating, reviewMessage, userID, productID) values ('4', 'Excellent!', '2', '3');
+
+"""
