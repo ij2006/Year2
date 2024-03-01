@@ -1,0 +1,22 @@
+def removeItemFromOrder():
+    global cost
+    item = order.value
+    itemSplit = item.split(' ')
+    itemRem = item.replace('Regular', '')
+    itemRem1 = itemRem.replace('Small', '')
+    itemRem2 = itemRem1.replace('Large', '')
+    itemRem3 = itemRem2.replace('X', '')
+    itemRem4 = ''.join(i for i in itemRem3 if not i.isdigit())
+    itemComp = itemRem4.strip()
+    amount = ''.join(i for i in itemRem3 if i.isdigit())
+
+    sql_select = "SELECT productName, productCost FROM ProductTable WHERE productName = '" + str(itemComp) +"'"
+    rows = query_database(database_file, sql_select)
+    productCost = float(rows[0][1])
+    cost = cost - (productCost * int(amount))
+    cost = round(cost,2)
+    totalMessage = 'Total £'+ str(cost)
+    orderTotal.value = totalMessage
+
+    #item = order.value
+    order.remove(item)
