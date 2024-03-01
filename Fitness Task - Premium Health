@@ -40,33 +40,6 @@ def display_selected_diet(selected_value):
     elif selected_value == 'Muscle gain':
         webbrowser.open_new_tab('https://www.healthline.com/nutrition/26-muscle-building-foods')
 
-
-def plot_calories():
-    # Creating a line graph to plot calories consumed
-    global glb_user_logged_in
-    # Join tables together using SQL and dreate dataframe
-    conn = sqlite3.connect(database_file)
-    cursor = conn.cursor()
-    cursor.execute("SELECT health_journal_calories, health_journal_date from Health_Journal_Table where userID =" + str(glb_user_logged_in)+"")
-    df = pd.DataFrame(cursor.fetchall(), columns = ['health_journal_calories', 'health_journal_date'])
-    # Create line graph
-    plt.plot(df['health_journal_date'], df['health_journal_calories'].astype(int))
-    plt.xlabel('Entry date')
-    plt.xticks(rotation = 45)
-    plt.ylabel('Calories consumed')
-    plt.title('Calorie consumption tracking')
-    plt.show()
-
-def plot_water_leaderboard():
-    # Creating a pie chart using groupby
-    global glb_user_logged_in
-    # Join tables together using SQL and dreate dataframe
-    conn = sqlite3.connect(database_file)
-    cursor = conn.cursor()
-    cursor.execute("SELECT User_Table.userID, username, health_journal_water from User_Table, Health_Journal_Table where User_Table.userID = Health_Journal_Table.userID")
-    df = pd.DataFrame(cursor.fetchall(), columns = ['userID', 'username', 'health_journal_water'])
-    print(df)
-
     # Group by username
     dftotal = df.groupby(['username'])['health_journal_water'].sum().reset_index()
     print(dftotal)
