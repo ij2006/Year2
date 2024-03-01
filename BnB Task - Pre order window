@@ -1,0 +1,43 @@
+####################
+# Pre order window #
+####################
+# Create window + box
+preOrderWindow = Window(app, title = 'Pre order', height = 400, width = 850)
+preOrderBox = Box(preOrderWindow, align = 'top', width = 800, height = 'fill')
+preOrderBoxL = Box(preOrderBox, align = 'left', width = 400, height = 400, layout = 'grid')
+preOrderBoxR = Box(preOrderBox, align = 'right', width = 400, height = 400, layout = 'grid')
+# Fill box left
+leftTitlePO = Text(preOrderBoxL, grid = [1,0], text = 'Select Items', size = 20)
+selectProduct = Combo(preOrderBoxL, options = ('Select product',), grid = [1,2], align = 'left', command = addSize)
+selectSize = Combo(preOrderBoxL, options = ('Select size', 'Small', 'Regular', 'Large'), grid = [1,4], align = 'left', visible = False)
+selectTime = Combo(preOrderBoxL, options = ('Select time slot', '10:00', '10:15', '10:30'), grid = [1,6], align = 'left')
+quantLbl = Text(preOrderBoxL, text = 'Enter quantity:', grid = [1,8], align = 'left')
+quant = TextBox(preOrderBoxL, grid = [2,8], align = 'left')
+addProduct = PushButton(preOrderBoxL, text = 'Add item', grid = [1,10], command = addItem)
+orderProduct = PushButton(preOrderBoxL, text = 'Complete order', grid = [3,12], command = completeOrder)
+# Fill box right
+rightTitlePO = Text(preOrderBoxR, grid = [1,0], text = 'Your Order', size = 20)
+order = ListBox(preOrderBoxR, grid = [1,2], width = 350, height = 200)
+removeItem = PushButton(preOrderBoxR, grid = [1,4], text = 'Remove item', command = removeItemFromOrder)
+orderTotal = Text(preOrderBoxR, grid = [1,5], align = 'right', text = totalMessage)
+# Improve layout
+blank_column = Text(preOrderBoxL, text = ' ', width = 5, grid = [0,0])
+blank_row = Text(preOrderBoxL, text = ' ', grid = [1,1])
+blank_row = Text(preOrderBoxL, text = ' ', grid = [1,3])
+blank_row = Text(preOrderBoxL, text = ' ', grid = [1,5])
+blank_row = Text(preOrderBoxL, text = ' ', grid = [1,7])
+blank_row = Text(preOrderBoxL, text = ' ', grid = [1,9])
+blank_row = Text(preOrderBoxL, text = ' ', grid = [1,11])
+blank_row = Text(preOrderBoxR, text = ' ', grid = [1,1])
+blank_row = Text(preOrderBoxR, text = ' ', grid = [1,3])
+# Colour scheme
+leftTitlePO.text_color = light_purple
+rightTitlePO.text_color = light_purple
+preOrderWindow.bg = light_purple
+preOrderBox.bg = 'white'
+preOrderBoxL.bg = 'white'
+preOrderBoxR.bg = 'white'
+addProduct.bg = light_purple
+orderProduct.bg = light_purple
+# Hide window
+preOrderWindow.hide()
