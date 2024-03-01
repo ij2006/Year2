@@ -39,44 +39,6 @@ def save_fitness_journal():
         info('Success','Your journal has been saved')
 
 
-def plot_weight():
-    # Creating a line graph to plot weight history 
-    global glb_user_logged_in
-    # Join tables together using SQL and dreate dataframe
-    conn = sqlite3.connect(database_file)
-    cursor = conn.cursor()
-    cursor.execute("SELECT fitness_journal_weight, fitness_journal_date from Fitness_Journal_Table where userID =" + str(glb_user_logged_in)+"")
-    df = pd.DataFrame(cursor.fetchall(), columns = ['fitness_journal_weight', 'fitness_journal_date'])
-    print(df)
-    # Create line graph
-    plt.plot(df['fitness_journal_date'], df['fitness_journal_weight'].astype(int))
-    plt.xlabel('Entry date')
-    plt.xticks(rotation = 45)
-    plt.ylabel('Weight in kg')
-    plt.title('Weight tracking')
-    plt.show()
-
-
-def premium_pie_chart():
-    # Creating a pie chart using groupby
-    global glb_user_logged_in
-    # Join tables together using SQL and dreate dataframe
-    conn = sqlite3.connect(database_file)
-    cursor = conn.cursor()
-    cursor.execute("SELECT User_Table.userID, username, fitness_journal_calories from User_Table, Fitness_Journal_Table where User_Table.userID = Fitness_Journal_Table.userID")
-    df = pd.DataFrame(cursor.fetchall(), columns = ['userID', 'username', 'fitness_journal_calories'])
-    print(df)
-
-    # Group by username
-    dftotal = df.groupby(['username'])['fitness_journal_calories'].sum().reset_index()
-    print(dftotal)
-
-    # Make the pie chart
-    mycolours = ['#ffb3e6', '#c2c2f0', '#ff9999','#66b3ff','#99ff99','#ffcc99'] # Colour codes
-    plt.pie(dftotal['fitness_journal_calories'], labels = dftotal['fitness_journal_calories'], colors = mycolours)
-    plt.legend(dftotal['username'], title = 'Username', bbox_to_anchor=(0.85,1.025), loc = 'upper left') # Positions the key away from the pie chart
-    plt.title('Compare total calories burnt with all premium users')
-    plt.show()
 
 def display_selected_workout(selected_value):
     # Open website in a new browser for the selected combo value
