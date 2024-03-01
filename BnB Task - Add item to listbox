@@ -1,0 +1,37 @@
+def addItem():
+    global cost
+    product = selectProduct.value
+    product_DB = removedigits(product)
+    size = selectSize.value
+    time = selectTime.value
+    amount = quant.value
+    sql_select = "SELECT productName, productCost FROM ProductTable WHERE productName = '" + str(product_DB) +"'"
+    rows = query_database(database_file, sql_select)
+    if product == 'Select product':
+        info('Error', 'Please select a product')
+    elif selectSize.visible == True and size == 'Select size':
+        info('Error', 'Please select a size')
+    #elif time == 'Select time slot':
+    #    info('Error', 'Please select a time slot')
+    elif amount == '':
+        info('Error', 'Please enter a quantity')
+    elif check_number(amount) == False:
+        info('Error', 'Please enter a valid numerical quantity')
+    elif selectSize.visible == True:
+        itemDetails = size + " " + product_DB + ' X ' + str(amount)
+        #itemDetails = size, product, 'X', amount
+        # Error made itemDetails into list and added{}
+        order.append(itemDetails)
+        productCost = float(rows[0][1])
+        cost = cost + (productCost * int(amount))
+        cost = round(cost,2)
+        totalMessage = 'Total £'+ str(cost)
+        orderTotal.value = totalMessage
+    else:
+        itemDetails = product_DB + ' X ' + str(amount)
+        order.append(itemDetails)
+        productCost = float(rows[0][1])
+        cost = cost + (productCost * int(amount))
+        cost = round(cost,2)
+        totalMessage = 'Total £'+ str(cost)
+        orderTotal.value = totalMessage
