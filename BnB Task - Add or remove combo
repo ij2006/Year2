@@ -1,0 +1,11 @@
+def addSize():
+    product = selectProduct.value
+    product_DB = removedigits(product)
+    sql_select = "SELECT productName, productCategory FROM ProductTable WHERE productName = '" + str(product_DB) +"'"
+    rows = query_database(database_file, sql_select)
+    if rows[0][0] == product_DB and rows[0][1] != 'Cake':
+        selectSize.visible = True
+    elif product == 'Select product':
+        print("")
+    else:
+        selectSize.visible = False
