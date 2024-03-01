@@ -1,0 +1,44 @@
+def leaveReview():
+        global starCount
+        global glb_user_logged_in
+        product = str(dashboardSelectProduct.value)
+        product1 = product.split(" ")
+        productID = ''.join(i for i in product1 if i.isdigit())
+
+        mysql = ("INSERT INTO ReviewTable (reviewRating, reviewMessage, userID, productID) VALUES ('" + starCount + "','Starrsss','" + str(glb_user_logged_in) + "','" + str(productID) + "')") 
+        execute_sql(database_file, mysql)
+        info('Review', 'Thank you for your review')
+
+def stars(num):
+    global starCount
+    starCount = num
+    if num == '1':
+        star1.text_color = 'Yellow'
+        star2.text_color = 'Black'
+        star3.text_color = 'Black'
+        star4.text_color = 'Black'
+        star5.text_color = 'Black'
+    elif num == '2':
+        star1.text_color = 'Yellow'
+        star2.text_color = 'Yellow'
+        star3.text_color = 'Black'
+        star4.text_color = 'Black'
+        star5.text_color = 'Black'
+    elif num == '3':
+        star1.text_color = 'Yellow'
+        star2.text_color = 'Yellow'
+        star3.text_color = 'Yellow'
+        star4.text_color = 'Black'
+        star5.text_color = 'Black'
+    elif num == '4':
+        star1.text_color = 'Yellow'
+        star2.text_color = 'Yellow'
+        star3.text_color = 'Yellow'
+        star4.text_color = 'Yellow'
+        star5.text_color = 'Black'
+    elif num == '5':
+        star1.text_color = 'Yellow'
+        star2.text_color = 'Yellow'
+        star3.text_color = 'Yellow'
+        star4.text_color = 'Yellow'
+        star5.text_color = 'Yellow'
