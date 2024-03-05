@@ -1,0 +1,23 @@
+from time import sleep 
+
+count = 0
+
+def order():
+    global count
+    count = 0
+    pizza.image = 'quarter.png'
+    pizza.repeat(5000, counter)
+
+
+def counter():
+    global count
+    count = count + 1
+    if count == 1:
+        pizza.image = 'half.png'
+        text.value = 'In the oven'
+    elif count == 2:
+        pizza.image = 'threeQuarters.png'
+        text.value = 'Out for delivery'
+    elif count == 3:
+        pizza.image = 'full.png'
+        text.value = 'Delivered!'
